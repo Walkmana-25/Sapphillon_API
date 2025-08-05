@@ -2,18 +2,37 @@ syntax = "proto3";
 
 package sapphillon.v1;
 
+// Provides read-only application version information.
+// The service returns semantic version strings for display and compatibility checks.
 service VersionService {
-  // Returns the current version of the application.
+  // Returns the current application version.
+  //
+  // Behavior:
+  // - Unary RPC.
+  // - Guaranteed to be fast and side-effect free.
+  // - Suitable for health checks or compatibility gating.
+  //
+  // Errors:
+  // - Typically none; may return INTERNAL if the version cannot be determined.
   rpc GetVersion(GetVersionRequest) returns (GetVersionResponse);
 }
 
+// Represents application version information.
+// The version string typically follows Semantic Versioning.
 message Version {
-  string version = 1; // The version of the application
+  // The version of the application.
+  // Format: "MAJOR.MINOR.PATCH" with optional pre-release or build metadata
+  // (e.g., "1.2.3", "1.2.3-beta.1", "1.2.3+build.45").
+  string version = 1;
 }
 
+// Request for GetVersion.
+// This message is intentionally empty to allow future extensibility without breaking changes.
 message GetVersionRequest {
-  // This message can be extended in the future if needed.
 }
+
+// Response for GetVersion.
 message GetVersionResponse {
-  Version version = 1; // The current version of the application
+  // The current application version.
+  Version version = 1;
 }

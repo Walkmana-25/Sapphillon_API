@@ -5,47 +5,150 @@ package sapphillon.v1;
 import "google/protobuf/timestamp.proto";
 import "sapphillon/v1/permission.proto";
 
+// Enumerates supported workflow source languages.
+// Used to indicate the language of WorkflowCode.code.
 enum WorkflowLanguage {
+  // Default value. Do not use.
   WORKFLOW_LANGUAGE_UNSPECIFIED = 0;
+
+  // TypeScript source code.
   WORKFLOW_LANGUAGE_TYPESCRIPT = 1;
+
+  // JavaScript source code.
   WORKFLOW_LANGUAGE_JAVASCRIPT = 2;
 }
 
+// Represents a specific revision of workflow source code and metadata.
+//
+// Fields:
+// - id: Stable identifier of the workflow code entity.
+// - code_revision: Monotonic integer representing the code version within the workflow.
+// - code: The source code text.
+// - language: The language of the code.
+// - created_at: Timestamp when this code revision was created.
+// - result: Optional preview or last run result associated with this code revision.
+// - required_permissions: Permissions required to run this code (declared by the author).
+//
+// Notes:
+// - code_revision should increase by 1 for each new revision of the same workflow.
+// - required_permissions should be kept minimal and specific to support principle of least privilege.
 message WorkflowCode {
+  // Stable identifier of the workflow code entity.
   string id = 1;
+
+  // Monotonic integer representing the code version within the workflow.
+  // Behavior: Required. Starts at 1 and increments with each change.
   int32 code_revision = 2;
+
+  // The workflow source code.
   string code = 3;
+
+  // The programming language of the source code.
   WorkflowLanguage language = 4;
+
+  // Creation time of this code revision.
   google.protobuf.Timestamp created_at = 5;
+
+  // Optional result preview or cached output associated with this code revision.
+  // Behavior: Optional. May be empty when no run has occurred.
   optional string result = 6;
+
+  // Permissions required to execute this workflow code.
+  // Use specific Permission.resource values to scope access where possible.
   repeated sapphillon.v1.Permission required_permissions = 7;
 }
 
+// Classifies the outcome of a workflow execution.
+// Values:
+// - WORKFLOW_RESULT_TYPE_SUCCESS_UNSPECIFIED: Execution completed successfully.
+// - WORKFLOW_RESULT_TYPE_FAILURE: Execution failed (see exit_code and description).
 enum WorkflowResultType {
+  // Execution completed successfully.
   WORKFLOW_RESULT_TYPE_SUCCESS_UNSPECIFIED = 0;
+
+  // Execution failed.
   WORKFLOW_RESULT_TYPE_FAILURE = 1;
 }
 
-// TODO Add data types to properly represent the results
+// Captures the result of running a workflow at a specific code revision.
+//
+// Fields:
+// - id: Identifier of the result record.
+// - display_name: Human-friendly name for UIs (e.g., "Nightly Run 2025-08-05").
+// - description: Summary of the execution and relevant details.
+// - result: Raw result payload or textual summary.
+// - ran_at: Time the execution completed.
+// - result_type: Success or failure classification.
+// - exit_code: Process exit code when applicable (0 for success).
+// - workflow_code_revision: The code revision that produced this result.
+// - workflow_result_revision: Monotonic revision of this result record itself.
+//
+// TODO: Add structured data types for results (logs, metrics, artifacts).
 message WorkflowResult {
+  // Identifier of the result record.
   string id = 1;
+
+  // Human-friendly name for display.
   string display_name = 2;
+
+  // Summary of the execution and relevant details.
   string description = 3;
-  string result = 4; // The result of the workflow execution
+
+  // Raw result payload or textual summary of the run.
+  string result = 4;
+
+  // Time the execution completed.
   google.protobuf.Timestamp ran_at = 5;
+
+  // Success or failure classification.
   WorkflowResultType result_type = 6;
-  int32 exit_code = 7; // Exit code of the workflow execution
-  int32 workflow_code_revision = 8; // Revision of the workflow code that produced this result
-  int32 workflow_result_revision = 9; // Revision of the workflow result
+
+  // Process exit code when applicable (0 for success).
+  int32 exit_code = 7;
+
+  // Code revision that produced this result.
+  int32 workflow_code_revision = 8;
+
+  // Monotonic revision of this result record.
+  int32 workflow_result_revision = 9;
 }
 
+// Represents a workflow entity including its code history and execution results.
+//
+// Fields:
+// - id: Stable identifier for the workflow.
+// - display_name: Human-readable name.
+// - description: Purpose and summary of the workflow.
+// - workflow_language: Preferred or primary language used by this workflow.
+// - workflow_code: History of code revisions (latest may be last element or determined externally).
+// - created_at: Time the workflow was created.
+// - updated_at: Time the workflow was last modified.
+// - workflow_results: Historical execution results for this workflow.
+//
+// Notes:
+// - Keep workflow_code revisions append-only to preserve history.
 message Workflow {
+  // Stable identifier for the workflow.
   string id = 1;
+
+  // Human-readable name for the workflow.
   string display_name = 2;
+
+  // Description of the workflow's purpose and behavior.
   string description = 3;
+
+  // Preferred or primary language used by this workflow.
   WorkflowLanguage workflow_language = 4;
+
+  // History of workflow code revisions.
   repeated WorkflowCode workflow_code = 5;
+
+  // Creation time of the workflow.
   google.protobuf.Timestamp created_at = 6;
+
+  // Last update time of the workflow.
   google.protobuf.Timestamp updated_at = 7;
+
+  // Historical execution results for this workflow.
   repeated WorkflowResult workflow_results = 8;
 }

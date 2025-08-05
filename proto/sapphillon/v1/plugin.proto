@@ -5,23 +5,104 @@ package sapphillon.v1;
 import "google/protobuf/timestamp.proto";
 import "sapphillon/v1/permission.proto";
 
+// Describes a callable function exposed by a plugin.
+// A function declares its purpose, identity, and required permissions for execution.
+//
+// Fields:
+// - function_id: Stable unique identifier used by systems to reference the function.
+// - function_name: Human-friendly name suitable for UIs.
+// - description: Summary of what the function does and typical use cases.
+// - permissions: Permissions required for the caller to execute this function.
+//
+// Example:
+//   PluginFunction {
+//     function_id: "send_notification"
+//     function_name: "Send Notification"
+//     description: "Sends a message to a configured channel"
+//     permissions: [{ permission_type: PERMISSION_TYPE_EXECUTE, resource: ["channels/general"] }]
+//   }
 message PluginFunction {
-  string function_id = 1; // Unique identifier for the function
-  string function_name = 2; // Name of the function
-  string description = 3; // Description of what the function does
-  repeated Permission permissions = 4; // Permissions required to execute this function
+  // Stable unique identifier for the function.
+  // Behavior: Required. Must be unique within the plugin package.
+  string function_id = 1;
+
+  // Human-friendly display name of the function.
+  // Example: "Send Notification".
+  string function_name = 2;
+
+  // Short description of what the function does and when to use it.
+  string description = 3;
+
+  // Permissions required to execute this function successfully.
+  // Use Permission.resource to scope to specific entities as needed.
+  repeated Permission permissions = 4;
 }
 
+// Represents a plugin package that can be installed into the platform.
+// A plugin groups one or more functions and includes metadata useful for discovery and governance.
+//
+// Fields:
+// - package_id: Stable unique identifier of the plugin package.
+// - package_name: Human-friendly name of the plugin.
+// - package_version: Semantic version string (e.g., "1.2.3").
+// - description: Summary of the plugin's purpose and capabilities.
+// - functions: Functions exposed by this plugin.
+// - plugin_store_url: URL to the plugin page or documentation.
+// - internal_plugin: Indicates whether the plugin is internal-only.
+// - verified: Indicates whether the plugin is verified by the platform.
+//
+// - deprecated: Indicates whether the plugin is deprecated and should not be used for new workflows.
+// - installed_at: Time when the plugin was installed.
+// - updated_at: Time when the plugin was last updated.
+//
+// Example:
+//   PluginPackage {
+//     package_id: "com.example.notifications"
+//     package_name: "Notifications"
+//     package_version: "1.4.0"
+//     description: "Provides functions for sending notifications"
+//     plugin_store_url: "https://plugins.example.com/com.example.notifications"
+//     verified: true
+//     functions: [{ function_id: "send_notification", ... }]
+//   }
 message PluginPackage {
+  // Stable unique identifier for the plugin package.
+  // Behavior: Required; unique across all installed plugins.
   string package_id = 1;
+
+  // Human-friendly name of the plugin package.
+  // Example: "Notifications".
   string package_name = 2;
+
+  // Semantic version of the plugin package.
+  // Format: "MAJOR.MINOR.PATCH" (e.g., "1.0.3").
   string package_version = 3;
+
+  // Description of the plugin's purpose and capabilities.
   string description = 4;
+
+  // Functions exposed by this plugin.
   repeated PluginFunction functions = 5;
+
+  // URL to the plugin's store page or documentation.
+  // Example: "https://plugins.example.com/com.example.notifications".
   string plugin_store_url = 6;
+
+  // Whether this plugin is intended for internal use only.
+  // Behavior: Optional. Defaults to false when unset.
   optional bool internal_plugin = 7;
+
+  // Whether this plugin has been verified by the platform or publisher.
+  // Behavior: Optional. Defaults to false when unset.
   optional bool verified = 8;
+
+  // Whether this plugin is deprecated. New usage should be avoided.
+  // Behavior: Optional. When true, UIs should display warnings.
   optional bool deprecated = 9;
+
+  // Time when the plugin was installed.
   google.protobuf.Timestamp installed_at = 10;
+
+  // Time when the plugin metadata or package was last updated.
   google.protobuf.Timestamp updated_at = 11;
 }

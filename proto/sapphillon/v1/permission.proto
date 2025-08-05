@@ -1,27 +1,104 @@
 syntax = "proto3";
 
-//TODO Add more permission types and levels as needed
-
+// Defines permission primitives used to authorize operations across Sapphillon services.
+// First line is a concise summary (Google API style).
+//
+// Notes:
+// - Comments follow Google API style: third person, present tense; first sentence is a summary.
+// - Fields include behavior notes and example values when helpful.
+// - Resource names are free-form in this version; future revisions may introduce canonical patterns.
+//
+// TODO: Add more permission types and levels as needed.
 package sapphillon.v1;
 
+// Enumerates the type of action a permission authorizes.
+// Values:
+// - PERMISSION_TYPE_UNSPECIFIED: Default value. Do not use.
+// - PERMISSION_TYPE_READ: Grants read-only access to the resource.
+// - PERMISSION_TYPE_WRITE: Grants write or modify access to the resource.
+// - PERMISSION_TYPE_EXECUTE: Grants ability to execute or invoke the resource (e.g., run a workflow).
 enum PermissionType {
+  // Default value. Do not use.
   PERMISSION_TYPE_UNSPECIFIED = 0;
+
+  // Grants read-only access to the resource (e.g., fetch, list, inspect).
   PERMISSION_TYPE_READ = 1;
+
+  // Grants write or modify access to the resource (e.g., create, update, delete).
   PERMISSION_TYPE_WRITE = 2;
+
+  // Grants ability to execute or invoke the resource (e.g., run, trigger).
   PERMISSION_TYPE_EXECUTE = 3;
 }
 
+// Indicates the sensitivity or criticality level required for a permission.
+// The level may be used by policy engines, reviewers, or UI to require stronger approval.
+// Values:
+// - PERMISSION_LEVEL_UNSPECIFIED: Default value. Do not use.
+// - PERMISSION_LEVEL_MEDIUM: Standard operations with moderate impact.
+// - PERMISSION_LEVEL_HIGH: Operations with elevated risk or broader impact.
+// - PERMISSION_LEVEL_CRITICAL: Operations that can cause system-wide effects or data loss.
 enum PermissionLevel {
+  // Default value. Do not use.
   PERMISSION_LEVEL_UNSPECIFIED = 0;
+
+  // Standard operations with moderate impact.
   PERMISSION_LEVEL_MEDIUM = 1;
+
+  // Operations with elevated risk or broader impact.
   PERMISSION_LEVEL_HIGH = 2;
+
+  // Operations that can cause system-wide effects or data loss.
   PERMISSION_LEVEL_CRITICAL = 3;
 }
 
+// Describes a single permission requirement or grant for a specific resource.
+// Usage:
+// - Include in APIs (e.g., workflow or plugin definitions) to declare needed permissions.
+// - Use in policy evaluation to check whether a caller is authorized.
+//
+// Fields:
+// - display_name: Human-readable name shown in UIs (e.g., "Read File").
+// - description: Longer explanation of the permission's purpose.
+// - permission_type: Action category (read, write, execute).
+// - resource: Resource identifiers this permission applies to. Free-form in v1.
+// - permission_level: Sensitivity level to inform review and approval.
+//
+// Example:
+//   Permission {
+//     display_name: "Execute Workflow"
+//     description: "Runs the daily ETL pipeline"
+//     permission_type: PERMISSION_TYPE_EXECUTE
+//     resource: ["workflows/etl_daily"]
+//     permission_level: PERMISSION_LEVEL_HIGH
+//   }
+//
+// Field behavior notes:
+// - display_name: Recommended.
+// - description: Recommended.
+// - permission_type: Required.
+// - resource: Optional; when omitted applies broadly.
+// - permission_level: Recommended; some features may require it.
 message Permission {
+  // Human-readable name of the permission, suitable for display in UIs.
+  // Example: "Read File", "Execute Workflow".
   string display_name = 1;
+
+  // Detailed description of what the permission allows and when it is used.
+  // Keep concise but informative for reviewers and users.
   string description = 2;
+
+  // The action category this permission authorizes.
+  // Behavior: Required.
   PermissionType permission_type = 3;
-  repeated string resource = 4; // The resource this permission applies to, e.g., "file.txt"
+
+  // Resource identifiers this permission applies to.
+  // Format: Free-form strings in v1 (e.g., "file.txt", "workflows/etl_daily", "buckets/logs").
+  // Behavior: Optional. If empty, applies broadly and should be used with caution.
+  // Example: ["projects/proj-123/locations/us/workflows/etl_daily"]
+  repeated string resource = 4;
+
+  // The sensitivity or criticality level associated with this permission.
+  // Behavior: Recommended. Some approval flows may require a minimum level.
   PermissionLevel permission_level = 5;
 }
