@@ -2,50 +2,75 @@ syntax = "proto3";
 
 package sapphillon.v1;
 
-// Service for generating structured workflows.
+// Generates and fixes structured workflow definitions from natural language descriptions.
+// Methods stream partial outputs to allow progressive rendering in UIs and long-running processing.
 service WorkflowService {
-  // Generates a workflow based on a natural language prompt.
-  // This is a custom method that takes a text prompt and returns
-  // a structured workflow definition.
+  // Generates a workflow from a natural language prompt.
+  //
+  // Behavior:
+  // - Server-streaming RPC that emits partial or incremental workflow definitions.
+  // - The client should read until the stream completes to obtain the final definition.
+  //
+  // Responses:
+  // - Each message may represent a partial draft or an updated full definition.
+  //
+  // Errors:
+  // - INVALID_ARGUMENT if the prompt is empty or malformed.
+  // - INTERNAL for unexpected generation errors.
   rpc GenerateWorkflow(GenerateWorkflowRequest) returns (stream GenerateWorkflowResponse);
 
-  // Fixes an existing workflow definition based on a description of issues.
-  // This method takes a workflow definition and a description of the issues
-  // and returns a fixed workflow definition.
+  // Fixes an existing workflow definition using a description of issues.
+  //
+  // Behavior:
+  // - Server-streaming RPC that emits suggested fixes and updated definitions incrementally.
+  // - The final message in the stream typically represents the fully fixed definition.
+  //
+  // Errors:
+  // - INVALID_ARGUMENT if workflow_definition or description is empty.
+  // - FAILED_PRECONDITION if the definition cannot be parsed.
+  // - INTERNAL for unexpected processing errors.
   rpc FixWorkflow(FixWorkflowRequest) returns (stream FixWorkflowResponse);
 }
 
-// Request message for generating a workflow.
+// Request to generate a workflow from a natural language prompt.
 message GenerateWorkflowRequest {
-  // The natural language prompt describing the desired workflow.
-  // e.g., "Check the weather, and if it's raining, send me a notification."
+  // Natural language prompt describing the desired workflow.
+  // Example: "Check the weather, and if it's raining, send me a notification."
+  // Behavior: Required; must be non-empty.
   string prompt = 1;
 }
 
-// Response message containing the generated workflow.
+// Server-streamed response containing the generated workflow definition.
+// Each streamed message may be partial; the client should merge or replace as appropriate.
 message GenerateWorkflowResponse {
-  // The structured workflow definition.
-  // The format of this definition can be JSON, YAML, or another
-  // structured format, represented as a string.
+  // Structured workflow definition.
+  // Format: String-encoded structure such as JSON or YAML.
+  // Example (JSON):
+  //   {"steps":[{"id":"check_weather"},{"id":"notify","if":"raining"}]}
   string workflow_definition = 1;
 }
 
+// Request to fix a workflow definition using a problem description.
 message FixWorkflowRequest {
   // The workflow definition to be fixed.
-  // This should be a structured format like JSON or YAML.
+  // Format: JSON, YAML, or another structured text representation.
+  // Behavior: Required; must be parseable by the service.
   string workflow_definition = 1;
 
-  // A description of the issues to fix.
-  // This can help guide the fixing process.
+  // Description of issues to fix or constraints to apply.
+  // Example: "Step IDs must be unique; add retry to notification step."
+  // Behavior: Required; must be non-empty.
   string description = 2;
 }
 
+// Server-streamed response carrying fixed workflow definitions and a change summary.
+// The final message typically represents the complete fixed definition.
 message FixWorkflowResponse {
   // The fixed workflow definition.
-  // This should be a structured format like JSON or YAML.
+  // Format: JSON, YAML, or another structured text representation.
   string fixed_workflow_definition = 1;
 
-  // A summary of the changes made to fix the workflow.
-  // This can help users understand what was changed.
+  // Summary of changes applied to produce the fixed definition.
+  // Example: "Renamed duplicate step IDs; added retry policy to 'notify'."
   string change_summary = 2;
 }
