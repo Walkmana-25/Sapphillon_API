@@ -4,6 +4,7 @@ package sapphillon.v1;
 
 import "google/protobuf/timestamp.proto";
 import "sapphillon/v1/permission.proto";
+import "sapphillon/v1/plugin.proto";
 
 // Enumerates supported workflow source languages.
 // Used to indicate the language of WorkflowCode.code.
