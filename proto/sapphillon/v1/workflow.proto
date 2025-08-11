@@ -49,9 +49,9 @@ message WorkflowCode {
   // Creation time of this code revision.
   google.protobuf.Timestamp created_at = 5;
 
-  // Optional result preview or cached output associated with this code revision.
-  // Behavior: Optional. May be empty when no run has occurred.
-  optional string result = 6;
+  // Optional result previews or cached outputs associated with this code revision.
+  // Behavior: Optional. May be empty when no run has occurred. Can store multiple results.
+  repeated string result = 6;
 
   // Permissions required to execute this workflow code.
   // Use specific Permission.resource values to scope access where possible.
