@@ -52,7 +52,7 @@ message WorkflowCode {
 
   // Optional result previews or cached outputs associated with this code revision.
   // Behavior: Optional. May be empty when no run has occurred. Can store multiple results.
-  repeated string result = 6;
+  repeated WorkflowResult result = 6;
 
   // Permissions required to execute this workflow code.
   // Use specific Permission.resource values to scope access where possible.
@@ -109,7 +109,9 @@ message WorkflowResult {
   int32 exit_code = 7;
 
   // Code revision that produced this result.
-  int32 workflow_code_revision = 8;
+  //int32 workflow_code_revision = 8;
+  reserved 8;
+  reserved "workflow_code_revision";
 
   // Monotonic revision of this result record.
   int32 workflow_result_revision = 9;
