@@ -57,6 +57,13 @@ message WorkflowCode {
   // Permissions required to execute this workflow code.
   // Use specific Permission.resource values to scope access where possible.
   repeated sapphillon.v1.Permission required_permissions = 7;
+
+  // Plugin packages that this workflow code depends on.
+  // This allows the workflow to use functions defined in these plugins.
+  repeated sapphillon.v1.PluginPackage plugin_packages = 8;
+
+  // Plugin functions that this workflow code directly uses.
+  repeated string plugin_function_ids = 9;
 }
 
 // Classifies the outcome of a workflow execution.
