@@ -34,6 +34,7 @@ enum WorkflowLanguage {
 // - required_permissions should be kept minimal and specific to support principle of least privilege.
 message WorkflowCode {
   // Stable identifier of the workflow code entity.
+  // Format: UUID.
   string id = 1;
 
   // Monotonic integer representing the code version within the workflow.
@@ -86,6 +87,7 @@ enum WorkflowResultType {
 // TODO: Add structured data types for results (logs, metrics, artifacts).
 message WorkflowResult {
   // Identifier of the result record.
+  // Format: UUID.
   string id = 1;
 
   // Human-friendly name for display.
@@ -129,6 +131,7 @@ message WorkflowResult {
 // - Keep workflow_code revisions append-only to preserve history.
 message Workflow {
   // Stable identifier for the workflow.
+  // Format: UUID.
   string id = 1;
 
   // Human-readable name for the workflow.
