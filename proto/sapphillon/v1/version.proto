@@ -21,15 +21,14 @@ service VersionService {
 // The version string typically follows Semantic Versioning.
 message Version {
   // The version of the application.
-// Format: "vMAJOR.MINOR.PATCH" with optional pre-release or build metadata
-// (e.g., "v1.2.3", "v1.2.3-alpha-1", "v1.2.3-beta.1").
+  // Format: "vMAJOR.MINOR.PATCH" with optional pre-release or build metadata
+  // (e.g., "v1.2.3", "v1.2.3-alpha-1", "v1.2.3-beta.1").
   string version = 1;
 }
 
 // Request for GetVersion.
 // This message is intentionally empty to allow future extensibility without breaking changes.
-message GetVersionRequest {
-}
+message GetVersionRequest {}
 
 // Response for GetVersion.
 message GetVersionResponse {
