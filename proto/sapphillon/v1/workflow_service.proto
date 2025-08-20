@@ -96,11 +96,15 @@ message FixWorkflowResponse {
   google.rpc.Status status = 3;
 }
 
+// Request to run a workflow.
+// Contains the workflow definition to be executed.
 message RunWorkflowRequest {
   // The workflow definition to run.
   sapphillon.v1.Workflow workflow_definition = 1;
 }
 
+// Response after running a workflow.
+// Contains the result of the workflow execution and status.
 message RunWorkflowResponse {
   // The result of the workflow execution.
   sapphillon.v1.WorkflowResult workflow_result = 1;
