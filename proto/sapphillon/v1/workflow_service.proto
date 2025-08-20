@@ -47,6 +47,9 @@ service WorkflowService {
   // - FAILED_PRECONDITION if the definition cannot be parsed.
   // - INTERNAL for unexpected processing errors.
   rpc FixWorkflow(FixWorkflowRequest) returns (stream FixWorkflowResponse);
+  
+  // Runs a workflow based on the provided definition.
+  rpc RunWorkflow(RunWorkflowRequest) returns (RunWorkflowResponse);
 }
 
 // Request to generate a workflow from a natural language prompt.
