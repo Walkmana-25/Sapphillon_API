@@ -49,12 +49,16 @@ enum PermissionType {
 // The level may be used by policy engines, reviewers, or UI to require stronger approval.
 // Values:
 // - PERMISSION_LEVEL_UNSPECIFIED: Default value. Do not use.
+// - PERMISSION_LEVEL_LOW: Low sensitivity or impact. May not require special approval.
 // - PERMISSION_LEVEL_MEDIUM: Standard operations with moderate impact.
 // - PERMISSION_LEVEL_HIGH: Operations with elevated risk or broader impact.
 // - PERMISSION_LEVEL_CRITICAL: Operations that can cause system-wide effects or data loss.
 enum PermissionLevel {
   // Default value. Do not use.
   PERMISSION_LEVEL_UNSPECIFIED = 0;
+
+  // Low sensitivity or impact. May not require special approval.
+  PERMISSION_LEVEL_LOW = 4;
 
   // Standard operations with moderate impact.
   PERMISSION_LEVEL_MEDIUM = 1;
