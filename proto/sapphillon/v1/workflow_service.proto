@@ -47,7 +47,7 @@ service WorkflowService {
   // - FAILED_PRECONDITION if the definition cannot be parsed.
   // - INTERNAL for unexpected processing errors.
   rpc FixWorkflow(FixWorkflowRequest) returns (stream FixWorkflowResponse);
-  
+
   // Runs a workflow based on the provided definition.
   rpc RunWorkflow(RunWorkflowRequest) returns (RunWorkflowResponse);
 }
@@ -100,10 +100,13 @@ message FixWorkflowResponse {
 }
 
 // Request to run a workflow.
-// Contains the workflow definition to be executed.
+// Contains the workflow ID and workflow code ID to be executed.
 message RunWorkflowRequest {
-  // The workflow definition to run.
-  sapphillon.v1.Workflow workflow_definition = 1;
+  // The ID of the workflow to run.
+  string workflow_id = 1;
+
+  // The ID of the workflow code to run.
+  string workflow_code_id = 2;
 }
 
 // Response after running a workflow.
