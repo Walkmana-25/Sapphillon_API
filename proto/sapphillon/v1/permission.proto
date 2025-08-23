@@ -28,21 +28,31 @@ package sapphillon.v1;
 // Enumerates the type of action a permission authorizes.
 // Values:
 // - PERMISSION_TYPE_UNSPECIFIED: Default value. Do not use.
-// - PERMISSION_TYPE_READ: Grants read-only access to the resource.
-// - PERMISSION_TYPE_WRITE: Grants write or modify access to the resource.
 // - PERMISSION_TYPE_EXECUTE: Grants ability to execute or invoke the resource (e.g., run a workflow).
+// - PERMISSION_TYPE_FILESYSTEM_READ: Grants read-only access to the file system.
+// - PERMISSION_TYPE_FILESYSTEM_WRITE: Grants write or modify access to the file system.
+// - PERMISSION_TYPE_NET_ACCESS: Grants network access.
+// - PERMISSION_TYPE_ALLOW_MCP: Grants permission to use the MCP AI service.
 enum PermissionType {
   // Default value. Do not use.
   PERMISSION_TYPE_UNSPECIFIED = 0;
 
-  // Grants read-only access to the resource (e.g., fetch, list, inspect).
-  PERMISSION_TYPE_READ = 1;
-
-  // Grants write or modify access to the resource (e.g., create, update, delete).
-  PERMISSION_TYPE_WRITE = 2;
+  // Reserved for backward compatibility. Use more specific permission types.
+  reserved 1, 2;
+  reserved "PERMISSION_TYPE_READ", "PERMISSION_TYPE_WRITE";
 
   // Grants ability to execute or invoke the resource (e.g., run, trigger).
   PERMISSION_TYPE_EXECUTE = 3;
+
+  // Grants read-only access to the file system.
+  PERMISSION_TYPE_FILESYSTEM_READ = 4;
+  // Grants write or modify access to the file system.
+  PERMISSION_TYPE_FILESYSTEM_WRITE = 5;
+
+  // Grants network access.
+  PERMISSION_TYPE_NET_ACCESS = 6;
+  // Grants permission to use the MCP AI service.
+  PERMISSION_TYPE_ALLOW_MCP = 7;
 }
 
 // Indicates the sensitivity or criticality level required for a permission.
