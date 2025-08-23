@@ -100,10 +100,15 @@ message FixWorkflowResponse {
 }
 
 // Request to run a workflow.
-// Contains the workflow definition to be executed.
+// Contains the workflow ID and workflow code ID to be executed.
 message RunWorkflowRequest {
-  // The workflow definition to run.
-  sapphillon.v1.Workflow workflow_definition = 1;
+  reserved 1;
+  reserved "workflow_definition";
+  // The ID of the workflow to run.
+  string workflow_id = 2;
+
+  // The ID of the workflow code to run.
+  string workflow_code_id = 3;
 }
 
 // Response after running a workflow.
