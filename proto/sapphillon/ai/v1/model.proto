@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package sapphillon.ai.v1;
+
+import "sapphillon/ai/v1/provider.proto";
+
+// Models represents a configured Large Language Model.
+message Models {
+  // The unique resource name of the model.
+  // Format: "models/{model_id}"
+  // The {model_id} is a unique identifier for the model.
+  string name = 1;
+
+  // A user-friendly display name for the model.
+  // e.g., "My Local Model"
+  string display_name = 2;
+
+  // A description of the model.
+  // Optional field to provide additional context about the model.
+  optional string description = 3;
+
+  // The provider associated with this model.
+  llm_api.v1.Provider provider = 4;
+}
