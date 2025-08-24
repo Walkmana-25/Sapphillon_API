@@ -145,12 +145,27 @@ message ListWorkflowsFilter {
   sapphillon.v1.WorkflowLanguage workflow_language = 2;
 }
 
+// Sort direction
+enum OrderByDirection {
+  ORDER_BY_DIRECTION_UNSPECIFIED = 0;
+  // Ascending
+  ORDER_BY_DIRECTION_ASC = 1;
+  // Descending
+  ORDER_BY_DIRECTION_DESC = 2;
+}
+
+// Order by clause
+message OrderByClause {
+  // Field name to order by (e.g. "display_name", "updated_at")
+  string field = 1;
+  OrderByDirection direction = 2;
+}
+
 message ListWorkflowsRequest {
   int32 page_size = 1;
   string page_token = 2;
   ListWorkflowsFilter filter = 3;
-  // Example: "display_name asc, updated_at desc"
-  string order_by = 4;
+  repeated OrderByClause order_by = 4;
 }
 
 message ListWorkflowsResponse {
