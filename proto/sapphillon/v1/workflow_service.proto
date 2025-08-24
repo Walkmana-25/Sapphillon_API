@@ -16,6 +16,7 @@ syntax = "proto3";
 
 package sapphillon.v1;
 
+import "google/protobuf/field_mask.proto";
 import "google/rpc/status.proto";
 import "sapphillon/v1/workflow.proto";
 
@@ -50,6 +51,14 @@ service WorkflowService {
 
   // Runs a workflow based on the provided definition.
   rpc RunWorkflow(RunWorkflowRequest) returns (RunWorkflowResponse);
+
+  rpc GetWorkflow(GetWorkflowRequest) returns (GetWorkflowResponse);
+
+  rpc ListWorkflows(ListWorkflowsRequest) returns (ListWorkflowsResponse);
+
+  rpc UpdateWorkflow(UpdateWorkflowRequest) returns (UpdateWorkflowResponse);
+
+  rpc DeleteWorkflow(DeleteWorkflowRequest) returns (DeleteWorkflowResponse);
 }
 
 // Request to generate a workflow from a natural language prompt.
@@ -121,3 +130,41 @@ message RunWorkflowResponse {
   // If the status is not OK, it indicates an error.
   google.rpc.Status status = 2;
 }
+
+message GetWorkflowRequest {
+  string workflow_id = 1;
+}
+
+message GetWorkflowResponse {
+  Workflow workflow = 1;
+  google.rpc.Status status = 2;
+}
+
+message ListWorkflowsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  string filter = 3;
+  string order_by = 4;
+}
+
+message ListWorkflowsResponse {
+  repeated Workflow workflows = 1;
+  string next_page_token = 2;
+  google.rpc.Status status = 3;
+}
+
+message UpdateWorkflowRequest {
+  Workflow workflow = 1;
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message UpdateWorkflowResponse {
+  Workflow workflow = 1;
+  google.rpc.Status status = 2;
+}
+
+message DeleteWorkflowRequest {
+  string workflow_id = 1;
+}
+
+message DeleteWorkflowResponse {}
