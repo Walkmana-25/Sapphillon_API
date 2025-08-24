@@ -25,7 +25,7 @@ message SearchModelRequest {
 
 message SearchModelResponse {
   // The list of models matching the search criteria.
-  repeated llm_api.v1.Models models = 1;
+  repeated sapphillon.ai.v1.Models models = 1;
 
   // The token to retrieve the next page of results.
   string next_page_token = 2;

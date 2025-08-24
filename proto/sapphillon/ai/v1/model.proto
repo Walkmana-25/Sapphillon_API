@@ -20,5 +20,5 @@ message Models {
   optional string description = 3;
 
   // The provider associated with this model.
-  llm_api.v1.Provider provider = 4;
+  sapphillon.ai.v1.Provider provider = 4;
 }
