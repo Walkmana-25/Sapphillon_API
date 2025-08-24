@@ -140,10 +140,16 @@ message GetWorkflowResponse {
   google.rpc.Status status = 2;
 }
 
+message ListWorkflowsFilter {
+  string display_name = 1;
+  sapphillon.v1.WorkflowLanguage workflow_language = 2;
+}
+
 message ListWorkflowsRequest {
   int32 page_size = 1;
   string page_token = 2;
-  string filter = 3;
+  ListWorkflowsFilter filter = 3;
+  // Example: "display_name asc, updated_at desc"
   string order_by = 4;
 }
 
