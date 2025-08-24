@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package sapphillon.ai.v1;
+
+// Provider represents a configured Large Language Model provider.
+// It holds the necessary information to interact with a specific LLM,
+// such as its name and API key.
+message Provider {
+  // The unique resource name of the provider.
+  // Format: "providers/{provider_id}"
+  // The {provider_id} is a unique identifier for the provider.
+  string name = 1;
+
+  // A user-friendly display name for the provider.
+  // e.g., "My Local Model"
+  string display_name = 2;
+
+  // The API key for authenticating with the provider.
+  // This field is sensitive and should be handled securely.
+  // It will be write-only (never returned in a Get or List request).
+  string api_key = 3;
+
+  // The API endpoint for the provider.
+  // This is the URL where requests should be sent to interact with the LLM.
+  string api_endpoint = 4;
+}

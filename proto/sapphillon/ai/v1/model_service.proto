@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package sapphillon.ai.v1;
+
+import "google/protobuf/field_mask.proto";
+import "google/rpc/status.proto";
+import "sapphillon/ai/v1/model.proto";
+
+/**
+ * Service for managing LLM models.
+ * Allows clients to configure, list, update, and remove
+ * different LLM models that the system can use.
+ */
+service ModelService {
+  // Creates a new model configuration.
+  // Returns the created model resource.
+  rpc CreateModel(CreateModelRequest) returns (CreateModelResponse);
+
+  // Retrieves a specific model's details by its resource name.
+  rpc GetModel(GetModelRequest) returns (GetModelResponse);
+
+  // Lists all configured models.
+  rpc ListModels(ListModelsRequest) returns (ListModelsResponse);
+
+  // Updates a model's configuration.
+  // Use a field_mask to specify which fields to update.
+  rpc UpdateModel(UpdateModelRequest) returns (UpdateModelResponse);
+
+  // Deletes a model configuration permanently.
+  rpc DeleteModel(DeleteModelRequest) returns (DeleteModelResponse);
+}
+
+// Request message for creating a model.
+message CreateModelRequest {
+  // The model resource to create.
+  // The `name` field should be left empty; the server will assign it.
+  Models model = 1;
+}
+
+// Response message for creating a model.
+message CreateModelResponse {
+  Models model = 1;
+  google.rpc.Status status = 2;
+}
+
+// Request message for retrieving a model.
+message GetModelRequest {
+  // The resource name of the model to retrieve.
+  // Format: "models/{model_id}"
+  string name = 1;
+}
+
+// Response message for retrieving a model.
+message GetModelResponse {
+  Models model = 1;
+  google.rpc.Status status = 2;
+}
+
+// Request message for listing models.
+message ListModelsRequest {
+  // The maximum number of models to return.
+  int32 page_size = 1;
+  // A page token, received from a previous `ListModels` call.
+  string page_token = 2;
+}
+
+// Response message for listing models.
+message ListModelsResponse {
+  // A list of configured models.
+  repeated Models models = 1;
+  // A token to retrieve the next page of results.
+  string next_page_token = 2;
+  google.rpc.Status status = 3;
+}
+
+// Request message for updating a model.
+message UpdateModelRequest {
+  // The model resource with updated fields.
+  // The `name` field is used to identify the model to update.
+  Models model = 1;
+  // The list of fields to be updated.
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+// Response message for updating a model.
+message UpdateModelResponse {
+  Models model = 1;
+  google.rpc.Status status = 2;
+}
+
+// Request message for deleting a model.
+message DeleteModelRequest {
+  // The resource name of the model to delete.
+  // Format: "models/{model_id}"
+  string name = 1;
+}
+
+// Response message for deleting a model.
+message DeleteModelResponse {
+  google.rpc.Status status = 1;
+}
