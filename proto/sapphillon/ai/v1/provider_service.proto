@@ -1,0 +1,128 @@
+syntax = "proto3";
+
+package sapphillon.ai.v1;
+
+import "google/protobuf/field_mask.proto";
+import "google/rpc/status.proto";
+import "sapphillon/ai/v1/provider.proto";
+
+/**
+ * Service for managing LLM providers.
+ * Allows clients to configure, list, update, and remove
+ * different LLM providers that the system can use.
+ */
+service ProviderService {
+  // Creates a new provider configuration.
+  // The `api_key` must be provided in the request.
+  // Returns the created provider resource.
+  rpc CreateProvider(CreateProviderRequest) returns (CreateProviderResponse);
+
+  // Retrieves a specific provider's details by its resource name.
+  // The `api_key` will not be returned in the response.
+  // Returns the requested provider resource.
+  rpc GetProvider(GetProviderRequest) returns (GetProviderResponse);
+
+  // Lists all configured providers.
+  // The `api_key` will not be returned in the response.
+  // Returns a list of provider resources.
+  rpc ListProviders(ListProvidersRequest) returns (ListProvidersResponse); // Already uses a proper response message
+
+  // Updates a provider's configuration.
+  // Use a field_mask to specify which fields to update.
+  // You can update the `display_name` and `api_key`.
+  // Returns the updated provider resource.
+  rpc UpdateProvider(UpdateProviderRequest) returns (UpdateProviderResponse);
+
+  // Deletes a provider configuration permanently.
+  // Returns an empty response on success.
+  rpc DeleteProvider(DeleteProviderRequest) returns (DeleteProviderResponse);
+}
+
+// Request message for creating a provider.
+message CreateProviderRequest {
+  // The provider resource to create.
+  // The `name` field should be left empty; the server will assign it.
+  // `display_name` and `api_key` are required.
+  Provider provider = 1;
+}
+
+// Request message for retrieving a provider.
+message GetProviderRequest {
+  // The resource name of the provider to retrieve.
+  // Format: "providers/{provider_id}"
+  string name = 1;
+  google.rpc.Status status = 2;
+}
+
+// Request message for listing providers.
+message ListProvidersRequest {
+  // The maximum number of providers to return.
+  // The service may return fewer than this value.
+  // If zero, the server will pick an appropriate default.
+  int32 page_size = 1;
+
+  // A page token, received from a previous `ListProviders` call.
+  // Provide this to retrieve the subsequent page.
+  string page_token = 2;
+}
+
+// Response message for listing providers.
+message ListProvidersResponse {
+  // A list of configured providers.
+  repeated Provider providers = 1;
+
+  // A token to retrieve the next page of results.
+  // If this field is empty, there are no more results.
+  string next_page_token = 2;
+
+  google.rpc.Status status = 3;
+}
+
+//
+// Response message for creating a provider.
+//
+message CreateProviderResponse {
+  Provider provider = 1;
+  google.rpc.Status status = 2;
+}
+
+//
+// Response message for retrieving a provider.
+//
+message GetProviderResponse {
+  Provider provider = 1;
+  google.rpc.Status status = 2;
+}
+
+//
+// Response message for updating a provider.
+//
+message UpdateProviderResponse {
+  Provider provider = 1;
+  google.rpc.Status status = 2;
+}
+
+//
+// Response message for deleting a provider.
+//
+message DeleteProviderResponse {
+  google.rpc.Status status = 1;
+}
+
+// Request message for updating a provider.
+message UpdateProviderRequest {
+  // The provider resource with updated fields.
+  // The `name` field is used to identify the provider to update.
+  Provider provider = 1;
+
+  // The list of fields to be updated.
+  // e.g., "display_name", "api_key"
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+// Request message for deleting a provider.
+message DeleteProviderRequest {
+  // The resource name of the provider to delete.
+  // Format: "providers/{provider_id}"
+  string name = 1;
+}
