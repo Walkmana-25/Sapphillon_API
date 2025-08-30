@@ -20,8 +20,32 @@ import "google/protobuf/timestamp.proto";
 import "sapphillon/v1/permission.proto";
 import "sapphillon/v1/plugin.proto";
 
+ // Represents a set of permissions granted to a specific plugin function.
+ // This message pairs a plugin function identifier with the list of permissions
+ // that callers are allowed to exercise when invoking that function.
+ //
+ // Fields:
+ // - plugin_function_id: Identifier of the plugin function to which the permissions apply.
+ //   Format: typically "package.function" or the plugin's internal function id. When used
+ //   within a WorkflowCode, this id should match an entry in WorkflowCode.plugin_function_ids.
+ // - permissions: The specific Permission values that are allowed for the given function.
+ //   These should be as narrow as possible to adhere to the principle of least privilege.
+ //   Example: granting only Permission{ resource: "secrets/my-secret", action: READ }
+ //
+ // Notes:
+ // - An AllowedPermission entry grants the listed permissions to code executing that
+ //   plugin function; it does not automatically grant permissions to other plugin functions.
+ // - Duplicates in permissions are allowed but have no extra effect; treat the list as a set.
 message AllowedPermission {
+  // Identifier of the plugin function this permission set applies to.
+  // This must correspond to a function exposed by one of the plugin packages listed
+  // in WorkflowCode.plugin_packages or to a function id present in WorkflowCode.plugin_function_ids.
   string plugin_function_id = 1;
+
+  // Permissions that are allowed when invoking the specified plugin function.
+  // Prefer specific Permission.resource and Permission.action combinations to minimize scope.
+  // Example:
+  //   permissions: [ { resource: "secrets/my-secret", action: READ } ]
   repeated Permission permissions = 2;
 }
 
@@ -85,6 +109,7 @@ message WorkflowCode {
   // Plugin functions that this workflow code directly uses.
   repeated string plugin_function_ids = 9;
 
+  // Allowed permissions for this workflow code.
   repeated AllowedPermission allowed_permissions = 10;
 }
 
