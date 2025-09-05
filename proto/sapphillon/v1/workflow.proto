@@ -20,22 +20,22 @@ import "google/protobuf/timestamp.proto";
 import "sapphillon/v1/permission.proto";
 import "sapphillon/v1/plugin.proto";
 
- // Represents a set of permissions granted to a specific plugin function.
- // This message pairs a plugin function identifier with the list of permissions
- // that callers are allowed to exercise when invoking that function.
- //
- // Fields:
- // - plugin_function_id: Identifier of the plugin function to which the permissions apply.
- //   Format: typically "package.function" or the plugin's internal function id. When used
- //   within a WorkflowCode, this id should match an entry in WorkflowCode.plugin_function_ids.
- // - permissions: The specific Permission values that are allowed for the given function.
- //   These should be as narrow as possible to adhere to the principle of least privilege.
- //   Example: granting only Permission{ resource: "secrets/my-secret", action: READ }
- //
- // Notes:
- // - An AllowedPermission entry grants the listed permissions to code executing that
- //   plugin function; it does not automatically grant permissions to other plugin functions.
- // - Duplicates in permissions are allowed but have no extra effect; treat the list as a set.
+// Represents a set of permissions granted to a specific plugin function.
+// This message pairs a plugin function identifier with the list of permissions
+// that callers are allowed to exercise when invoking that function.
+//
+// Fields:
+// - plugin_function_id: Identifier of the plugin function to which the permissions apply.
+//   Format: typically "package.function" or the plugin's internal function id. When used
+//   within a WorkflowCode, this id should match an entry in WorkflowCode.plugin_function_ids.
+// - permissions: The specific Permission values that are allowed for the given function.
+//   These should be as narrow as possible to adhere to the principle of least privilege.
+//   Example: granting only Permission{ resource: "secrets/my-secret", action: READ }
+//
+// Notes:
+// - An AllowedPermission entry grants the listed permissions to code executing that
+//   plugin function; it does not automatically grant permissions to other plugin functions.
+// - Duplicates in permissions are allowed but have no extra effect; treat the list as a set.
 message AllowedPermission {
   // Identifier of the plugin function this permission set applies to.
   // This must correspond to a function exposed by one of the plugin packages listed
@@ -98,9 +98,8 @@ message WorkflowCode {
   // Behavior: Optional. May be empty when no run has occurred. Can store multiple results.
   repeated WorkflowResult result = 6;
 
-  // Permissions required to execute this workflow code.
-  // Use specific Permission.resource values to scope access where possible.
-  repeated sapphillon.v1.Permission required_permissions = 7;
+  reserved 7;
+  reserved "required_permissions";
 
   // Plugin packages that this workflow code depends on.
   // This allows the workflow to use functions defined in these plugins.

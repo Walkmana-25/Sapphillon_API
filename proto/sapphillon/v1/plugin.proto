@@ -50,6 +50,12 @@ message PluginFunction {
   // Permissions required to execute this function successfully.
   // Use Permission.resource to scope to specific entities as needed.
   repeated Permission permissions = 4;
+
+  // Arguments of the function, described in JSON Schema format.
+  string arguments = 5;
+
+  // Return value of the function, described in JSON Schema format.
+  string returns = 6;
 }
 
 // Represents a plugin package that can be installed into the platform.
