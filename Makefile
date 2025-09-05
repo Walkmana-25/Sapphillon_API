@@ -36,8 +36,3 @@ buf_debug:
 	fi; \
 	evans --proto $$proto_files repl
 
-buf_generate:
-	@echo "Generate Protocol Buffer Code"
-	@echo "----------------------------------------------------------"
-	buf generate proto
-	@echo "----------------------------------------------------------"
