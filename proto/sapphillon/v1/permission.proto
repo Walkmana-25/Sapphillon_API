@@ -33,6 +33,7 @@ package sapphillon.v1;
 // - PERMISSION_TYPE_FILESYSTEM_WRITE: Grants write or modify access to the file system.
 // - PERMISSION_TYPE_NET_ACCESS: Grants network access.
 // - PERMISSION_TYPE_ALLOW_MCP: Grants permission to use the MCP AI service.
+// - PERMISSION_TYPE_ALLOW_ALL: Grants all permissions. Use with caution.
 enum PermissionType {
   // Default value. Do not use.
   PERMISSION_TYPE_UNSPECIFIED = 0;
@@ -53,6 +54,9 @@ enum PermissionType {
   PERMISSION_TYPE_NET_ACCESS = 6;
   // Grants permission to use the MCP AI service.
   PERMISSION_TYPE_ALLOW_MCP = 7;
+
+  // Grants all permissions. Use with caution.
+  PERMISSION_TYPE_ALLOW_ALL = 8;
 }
 
 // Indicates the sensitivity or criticality level required for a permission.
