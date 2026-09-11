@@ -1,0 +1,220 @@
+// Copyright 2025 Yuta Takahashi
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package sapphillon.arcana.v1;
+
+import "google/protobuf/timestamp.proto";
+import "sapphillon/arcana/v1/permission.proto";
+import "sapphillon/v1/semver.proto";
+
+// Defines the TUF-style repository index schema for the Arcana plugin registry.
+// Per-version package metadata lives in TargetCustom (the developer-signed
+// `Target.custom["sapphillon"]` block), while lifecycle states such as yank and
+// deprecation are kept in the admin-signed RepoOverrideIndex overlay. Together
+// these replace the flat IndexCore/RepositoryMeta/PackageMeta/VersionMeta schema
+// used previously.
+
+// Per-version package metadata stored as the developer-signed `Target.custom["sapphillon"]` block inside a TUF target.
+// Mirrors the static metadata from package.toml plus the function-level permission
+// snapshot. The developer signs this block with their Minisign key; the client
+// verifies it against the author public key advertised out-of-band before install.
+//
+// Once a (package_id, version) pair is registered, TargetCustom is immutable;
+// lifecycle changes (yank, deprecation, abandonment) are applied via PackageOverride
+// instead of by mutating this block, so the developer signature stays stable.
+//
+// Fields:
+// - package_id: The stable unique identifier of the package.
+// - package_name: The human-friendly display name of the package.
+// - version: The SemVer version of this target, broken into structured components.
+// - description: A short summary of the package's purpose.
+// - author_github_id: The GitHub username of the representative author.
+// - download_url: The external download URL for `package.js`.
+// - function_permissions: The function-level permission snapshot for this version.
+// - tags: Tags for categorization and discoverability.
+// - homepage_url: Optional URL to homepage or documentation.
+// - arcana_schema_version: The Arcana schema version (distinct from the TUF spec_version).
+// - github_numeric_id: Optional immutable GitHub numeric user id for ownership verification.
+//
+// Example:
+// ```proto
+//   TargetCustom {
+//     package_id: "my-plugin"
+//     package_name: "My Plugin"
+//     version: { major: 1, minor: 0, patch: 0 }
+//     download_url: "https://registry.example.com/packages/my-plugin/1.0.0/package.js"
+//     function_permissions: [{ function_name: "sendNotification", permissions: [{ kind: "net", target: "*" }] }]
+//   }
+// ```
+message TargetCustom {
+  // The stable unique identifier of the package.
+  // Behavior: Immutable once registered. Combined with `version`, it forms the
+  // unique target identity.
+  // Format: Lowercase, hyphen-separated identifier (e.g., "my-plugin").
+  string package_id = 1;
+
+  // The human-friendly display name of the package.
+  // Example: "My Plugin".
+  string package_name = 2;
+
+  // The structured semantic version of this target.
+  // Behavior: Encoded as a structured SemanticVersion (https://semver.org) instead
+  // of a free-form string so consumers can compare versions programmatically.
+  // Together with `package_id`, the (package_id, version) pair is immutable once
+  // published; re-publishing the same pair is prohibited.
+  // Example: { major: 1, minor: 0, patch: 0 } for "1.0.0".
+  sapphillon.v1.SemanticVersion version = 3;
+
+  // A short summary of the package's purpose and capabilities.
+  string description = 4;
+
+  // The GitHub username of the package's representative author/owner.
+  // Behavior: Singular. Used for ownership attribution and cross-referenced with
+  // the developer's Minisign public key during verification. Prefer the immutable
+  // `github_numeric_id` as the ownership anchor because usernames can be renamed.
+  // Example: "alice".
+  string author_github_id = 5;
+
+  // The external download URL for the bundled `package.js`.
+  // Hosting is decoupled from the TUF repository: the target points at an external
+  // location (e.g., a CDN or GitHub release asset) that serves the signed artifact.
+  // Example: "https://registry.example.com/packages/my-plugin/1.0.0/package.js".
+  string download_url = 6;
+
+  // The function-level permission snapshot for this version.
+  // Behavior: Used by the manifest consistency check during verification — the
+  // client MUST confirm these match the permissions embedded in the downloaded
+  // package.js manifest exactly; any mismatch aborts the installation.
+  // Must be sorted in ascending order by `function_name` before serialization.
+  repeated FunctionPermissionMeta function_permissions = 7;
+
+  // The list of tags for categorization and discoverability.
+  // Example: ["automation", "utility", "ai"].
+  repeated string tags = 8;
+
+  // Optional URL to the package's homepage, documentation, or source repository.
+  // Behavior: Optional. If omitted, no homepage is linked.
+  // Example: "https://github.com/user/my-plugin".
+  optional string homepage_url = 9;
+
+  // The Arcana schema version this target conforms to.
+  // Behavior: Distinct from the TUF `spec_version`; used by the toolchain to select
+  // the correct deserialization and validation rules.
+  // Example: "v1".
+  string arcana_schema_version = 10;
+
+  // The immutable GitHub numeric user id used for ownership verification.
+  // Behavior: Optional but recommended. Unlike `author_github_id`, this numeric id
+  // never changes when a user is renamed, so it serves as the stable ownership anchor.
+  // Example: "12345678".
+  optional string github_numeric_id = 11;
+}
+
+// Admin-signed overlay that carries package lifecycle state (yank, deprecation, abandonment) outside the developer-signed TargetCustom.
+// Serialized as a direct target named "repo-policy/overrides.json" inside
+// targets.json and signed with the repository's targets (admin) key — it is NOT a
+// delegated target.
+//
+// Keeping lifecycle state in an admin-controlled overlay means a package can be
+// yanked or deprecated without re-signing the developer's TargetCustom block.
+//
+// Fields:
+// - overrides: The per-package override entries.
+// - arcana_schema_version: The Arcana schema version.
+//
+// Example:
+// ```proto
+//   RepoOverrideIndex {
+//     overrides: [{ target_path: "packages/alice/my-plugin/1.0.0/package.js", yanked: true, yank_reason: "security" }]
+//     arcana_schema_version: "v1"
+//   }
+// ```
+message RepoOverrideIndex {
+  // The per-package override entries.
+  // Behavior: Should be sorted in ascending order by `target_path` before serialization.
+  repeated PackageOverride overrides = 1;
+
+  // The Arcana schema version this overlay conforms to.
+  // Behavior: Distinct from the TUF `spec_version`.
+  // Example: "v1".
+  string arcana_schema_version = 2;
+}
+
+// A single admin-signed lifecycle override for one package target.
+// Identified by `target_path`; each flag overrides the corresponding lifecycle
+// state that the developer-signed TargetCustom cannot change after publication.
+//
+// Fields:
+// - target_path: The TUF target path being overridden.
+// - yanked: Whether the target has been yanked.
+// - yank_reason: The reason for the yank.
+// - deprecated: Whether the target is deprecated.
+// - deprecated_message: The deprecation message shown to users.
+// - abandoned: Whether the target is considered abandoned.
+// - advisory_url: URL of a related security advisory.
+// - updated_at: When this override was last updated.
+//
+// Example:
+// ```proto
+//   PackageOverride {
+//     target_path: "packages/alice/my-plugin/1.0.0/package.js"
+//     yanked: true
+//     yank_reason: "Remote code execution vulnerability"
+//     advisory_url: "https://github.com/user/my-plugin/security/advisories/GHSA-xxxx"
+//     updated_at: { seconds: 1738324800 }
+//   }
+// ```
+message PackageOverride {
+  // The TUF target path this override applies to.
+  // Behavior: Must uniquely identify a published target.
+  // Format: "packages/<author>/<package>/<version>/package.js".
+  // Example: "packages/alice/my-plugin/1.0.0/package.js".
+  string target_path = 1;
+
+  // Whether the target has been yanked.
+  // Behavior: When true, clients MUST refuse new installs of this version.
+  // Already-installed copies are unaffected.
+  bool yanked = 2;
+
+  // The reason the target was yanked.
+  // Behavior: Only meaningful when `yanked` is true.
+  // Example: "Remote code execution vulnerability".
+  string yank_reason = 3;
+
+  // Whether the target is deprecated.
+  // Behavior: When true, UIs should warn against new installs but need not block them.
+  bool deprecated = 4;
+
+  // The deprecation message shown to users.
+  // Behavior: Only meaningful when `deprecated` is true.
+  // Example: "Use my-plugin v2.x instead".
+  string deprecated_message = 5;
+
+  // Whether the target is considered abandoned (no longer maintained).
+  // Behavior: Advisory only; does not block installation.
+  bool abandoned = 6;
+
+  // The URL of a related security advisory.
+  // Behavior: Optional. Surface in UIs alongside yank/deprecation warnings.
+  // Example: "https://github.com/user/my-plugin/security/advisories/GHSA-xxxx".
+  string advisory_url = 7;
+
+  // When this override was last updated.
+  // Behavior: Encoded as a well-typed google.protobuf.Timestamp rather than an
+  // RFC 3339 string, so consumers do not need to re-parse the timestamp text.
+  // Example: { seconds: 1738324800, nanos: 0 } for "2025-01-31T12:00:00Z".
+  google.protobuf.Timestamp updated_at = 8;
+}

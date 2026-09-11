@@ -1,0 +1,81 @@
+// Copyright 2025 Yuta Takahashi
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package sapphillon.arcana.v1;
+
+// Defines the Arcana plugin permission model used by PluginManifest and the
+// repository index. Permissions follow the Deno capability model and are
+// intentionally distinct from the workflow permission model in sapphillon.v1,
+// which carries display metadata and approval levels for the platform UI.
+
+// Describes a single runtime permission required by a plugin function, following the Deno permission model.
+// Each permission pairs a `kind` (the capability category) with a `target` (the
+// scoped resource the capability applies to).
+//
+// Fields:
+// - kind: The capability category (e.g., "read", "write", "net", "run", "env", "sys", "ffi").
+// - target: The resource the capability is scoped to, interpreted per `kind`.
+//
+// Example:
+// ```proto
+//   Permission {
+//     kind: "net"
+//     target: "registry.npmjs.org"
+//   }
+// ```
+message Permission {
+  // The capability category this permission authorizes.
+  // Behavior: Required. Validated against the Deno-aligned whitelist during static
+  // analysis (sapphillon-cli check).
+  // Format: One of "read", "write", "net", "run", "env", "sys", "ffi".
+  // Example: "net".
+  string kind = 1;
+
+  // The resource the capability is scoped to, interpreted according to `kind`.
+  // Behavior: Optional for broadly-scoped kinds; use "*" to grant the full scope of
+  // the kind. Semantics by kind: filesystem path (read/write), host (net), command
+  // (run), variable name (env), API kind (sys), ABI path (ffi).
+  // Example: "registry.npmjs.org", "/etc/hosts", "*".
+  string target = 2;
+}
+
+// The function-level permission requirements for a specific version of a package.
+// Used by the manifest consistency check: the permissions declared here in the
+// repository index MUST exactly match those embedded in the package.js manifest.
+//
+// Fields:
+// - function_name: The name of the function these permissions apply to.
+// - permissions: The permissions required to execute this function.
+//
+// Example:
+// ```proto
+//   FunctionPermissionMeta {
+//     function_name: "sendNotification"
+//     permissions: [{ kind: "net", target: "*" }]
+//   }
+// ```
+message FunctionPermissionMeta {
+  // The name of the function these permissions apply to.
+  // Behavior: Must match the `name` of a FunctionDefinition in the package manifest.
+  // Example: "sendNotification".
+  string function_name = 1;
+
+  // The permissions required to execute this function.
+  // Behavior: Each entry uses the Arcana permission model
+  // (sapphillon.arcana.v1.Permission). Must be sorted in ascending order by
+  // (kind, target) before serialization.
+  repeated Permission permissions = 2;
+}

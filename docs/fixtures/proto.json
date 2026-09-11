@@ -35,7 +35,7 @@
             },
             {
               "name": "display_name",
-              "description": "A user-friendly display name for the model.\ne.g., \"My Local Model\"",
+              "description": "A user-friendly display name for the model.\nExample: \"My Local Model\".",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -133,7 +133,7 @@
           "fields": [
             {
               "name": "model",
-              "description": "",
+              "description": "The model resource.",
               "label": "",
               "type": "Models",
               "longType": "Models",
@@ -145,7 +145,7 @@
             },
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -193,7 +193,7 @@
           "fields": [
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -241,7 +241,7 @@
           "fields": [
             {
               "name": "model",
-              "description": "",
+              "description": "The model resource.",
               "label": "",
               "type": "Models",
               "longType": "Models",
@@ -253,7 +253,7 @@
             },
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -337,7 +337,7 @@
             },
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -397,7 +397,7 @@
           "fields": [
             {
               "name": "model",
-              "description": "",
+              "description": "The model resource.",
               "label": "",
               "type": "Models",
               "longType": "Models",
@@ -409,7 +409,7 @@
             },
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -528,7 +528,7 @@
             },
             {
               "name": "display_name",
-              "description": "A user-friendly display name for the provider.\ne.g., \"My Local Model\"",
+              "description": "A user-friendly display name for the provider.\nExample: \"My Local Model\".",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -614,7 +614,7 @@
           "fields": [
             {
               "name": "provider",
-              "description": "",
+              "description": "The provider resource.",
               "label": "",
               "type": "Provider",
               "longType": "Provider",
@@ -626,7 +626,7 @@
             },
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -674,7 +674,7 @@
           "fields": [
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -710,7 +710,7 @@
             },
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the request.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -734,7 +734,7 @@
           "fields": [
             {
               "name": "provider",
-              "description": "",
+              "description": "The provider resource.",
               "label": "",
               "type": "Provider",
               "longType": "Provider",
@@ -746,7 +746,7 @@
             },
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -830,7 +830,7 @@
             },
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -866,7 +866,7 @@
             },
             {
               "name": "update_mask",
-              "description": "The list of fields to be updated.\ne.g., \"display_name\", \"api_key\"",
+              "description": "The list of fields to be updated.\nExample: \"display_name\", \"api_key\".",
               "label": "",
               "type": "FieldMask",
               "longType": "google.protobuf.FieldMask",
@@ -890,7 +890,7 @@
           "fields": [
             {
               "name": "provider",
-              "description": "",
+              "description": "The provider resource.",
               "label": "",
               "type": "Provider",
               "longType": "Provider",
@@ -902,7 +902,7 @@
             },
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -1001,7 +1001,7 @@
           "name": "SearchModelRequest",
           "longName": "SearchModelRequest",
           "fullName": "sapphillon.ai.v1.SearchModelRequest",
-          "description": "",
+          "description": "Request message for searching models.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": true,
@@ -1009,7 +1009,7 @@
           "fields": [
             {
               "name": "provider_name_query",
-              "description": "The query string to search for models.",
+              "description": "The query string to match against provider names.\nIf not specified, all providers are included.",
               "label": "optional",
               "type": "string",
               "longType": "string",
@@ -1021,7 +1021,7 @@
             },
             {
               "name": "model_name_query",
-              "description": "",
+              "description": "The query string to match against model names.\nIf not specified, all models are included.",
               "label": "optional",
               "type": "string",
               "longType": "string",
@@ -1061,7 +1061,7 @@
           "name": "SearchModelResponse",
           "longName": "SearchModelResponse",
           "fullName": "sapphillon.ai.v1.SearchModelResponse",
-          "description": "",
+          "description": "Response message for searching models.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -1093,7 +1093,7 @@
             },
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -1111,7 +1111,7 @@
           "name": "SearchModelService",
           "longName": "SearchModelService",
           "fullName": "sapphillon.ai.v1.SearchModelService",
-          "description": "",
+          "description": "Service for searching LLM models.\nAllows clients to find models by provider or model name using\nflexible query matching.",
           "methods": [
             {
               "name": "SearchModel",
@@ -1128,6 +1128,847 @@
           ]
         }
       ]
+    },
+    {
+      "name": "sapphillon/arcana/v1/package_config.proto",
+      "description": "",
+      "package": "sapphillon.arcana.v1",
+      "hasEnums": false,
+      "hasExtensions": false,
+      "hasMessages": true,
+      "hasServices": false,
+      "enums": [],
+      "extensions": [],
+      "messages": [
+        {
+          "name": "PackageConfig",
+          "longName": "PackageConfig",
+          "fullName": "sapphillon.arcana.v1.PackageConfig",
+          "description": "Holds the static metadata for a plugin package as authored by the developer in package.toml.\nThis metadata is static (declared by the developer); dynamic metadata such as permissions\nare extracted from JSDoc at build time and are NOT part of this message.\nOnce a package is registered in a repository, the combination of id and version is immutable.\nRe-registration or overwriting of the same (id, version) pair is prohibited.\n\nFields:\n- id: Stable unique identifier of the package.\n- name: Human-friendly display name.\n- version: Semantic version string.\n- description: Summary of the package's purpose.\n- author_github_id: GitHub username of the representative author.\n- tags: Tags for categorization and discoverability.\n- homepage_url: Optional URL to homepage or documentation.\n- github_numeric_id: Optional immutable GitHub numeric user id for ownership verification.\n\nExample:\n```proto\n  PackageConfig {\n    id: \"my-awesome-plugin\"\n    name: \"My Awesome Plugin\"\n    version: \"1.0.0\"\n    description: \"Provides useful functionality\"\n    author_github_id: \"alice\"\n    tags: [\"automation\", \"utility\"]\n    homepage_url: \"https://github.com/user/my-plugin\"\n  }\n```",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": true,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "id",
+              "description": "The stable unique identifier of the package.\nBehavior: Required. Must be unique within a repository. Immutable once registered.\nFormat: Lowercase, hyphen-separated identifier (e.g., \"my-awesome-plugin\").\nExample: \"my-awesome-plugin\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "name",
+              "description": "The human-friendly display name of the package.\nExample: \"My Awesome Plugin\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "version",
+              "description": "The semantic version of the package.\nFormat: Semantic Versioning \"MAJOR.MINOR.PATCH\" (e.g., \"1.0.0\", \"2.1.3-beta.1\").\nBehavior: Once registered in a repository, an (id, version) pair is immutable\nand cannot be overwritten.\nExample: \"1.0.0\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "description",
+              "description": "A short summary of the package's purpose and capabilities.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "author_github_id",
+              "description": "The GitHub username of the package's representative author/owner.\nBehavior: Singular; identifies a single representative owner. Used for ownership\nattribution and cross-referenced with the developer's Minisign public key during\nverification. Prefer `github_numeric_id` as the immutable ownership anchor\nbecause GitHub usernames can be renamed.\nExample: \"alice\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "tags",
+              "description": "The list of tags for categorization and discoverability.\nExample: [\"automation\", \"utility\", \"ai\"].",
+              "label": "repeated",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "homepage_url",
+              "description": "Optional URL to the package's homepage, documentation, or source repository.\nBehavior: Optional. If omitted, no homepage is linked.\nExample: \"https://github.com/user/my-plugin\".",
+              "label": "optional",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": true,
+              "oneofdecl": "_homepage_url",
+              "defaultValue": ""
+            },
+            {
+              "name": "github_numeric_id",
+              "description": "The immutable GitHub numeric user id used for ownership verification.\nBehavior: Optional but recommended. Unlike `author_github_id`, this numeric id\nnever changes when a user is renamed, so it serves as the stable ownership anchor.\nExample: \"12345678\".",
+              "label": "optional",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": true,
+              "oneofdecl": "_github_numeric_id",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "PackageToml",
+          "longName": "PackageToml",
+          "fullName": "sapphillon.arcana.v1.PackageToml",
+          "description": "Root structure of the package.toml file.\nWraps the package configuration and declares the API (schema) version the package targets.\n\nFields:\n- package: The package configuration block.\n- api_version: The Arcana ecosystem API version this package targets (Kubernetes-style, e.g., \"v1\", \"v1alpha1\").\n\nExample:\n```proto\n  PackageToml {\n    package: {\n      id: \"my-awesome-plugin\"\n      name: \"My Awesome Plugin\"\n      version: \"1.0.0\"\n      description: \"Provides useful functionality\"\n      author_github_id: \"alice\"\n      tags: [\"automation\", \"utility\"]\n      homepage_url: \"https://github.com/user/my-plugin\"\n    }\n    api_version: \"v1\"\n  }\n```",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "package",
+              "description": "The package configuration block.\nSee PackageConfig for details.",
+              "label": "",
+              "type": "PackageConfig",
+              "longType": "PackageConfig",
+              "fullType": "sapphillon.arcana.v1.PackageConfig",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "api_version",
+              "description": "The Arcana ecosystem API version this package targets.\nUsed by the toolchain to enforce compatibility checks.\nBehavior: Packages built for incompatible API versions may be rejected.\nFormat: Kubernetes-style version string — \"vMAJOR\" with an optional stability\n        suffix: \"alphaN\" or \"betaN\" (e.g., \"v1\", \"v1alpha1\", \"v2beta3\").\nExample: \"v1\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        }
+      ],
+      "services": []
+    },
+    {
+      "name": "sapphillon/arcana/v1/permission.proto",
+      "description": "",
+      "package": "sapphillon.arcana.v1",
+      "hasEnums": false,
+      "hasExtensions": false,
+      "hasMessages": true,
+      "hasServices": false,
+      "enums": [],
+      "extensions": [],
+      "messages": [
+        {
+          "name": "FunctionPermissionMeta",
+          "longName": "FunctionPermissionMeta",
+          "fullName": "sapphillon.arcana.v1.FunctionPermissionMeta",
+          "description": "The function-level permission requirements for a specific version of a package.\nUsed by the manifest consistency check: the permissions declared here in the\nrepository index MUST exactly match those embedded in the package.js manifest.\n\nFields:\n- function_name: The name of the function these permissions apply to.\n- permissions: The permissions required to execute this function.\n\nExample:\n```proto\n  FunctionPermissionMeta {\n    function_name: \"sendNotification\"\n    permissions: [{ kind: \"net\", target: \"*\" }]\n  }\n```",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "function_name",
+              "description": "The name of the function these permissions apply to.\nBehavior: Must match the `name` of a FunctionDefinition in the package manifest.\nExample: \"sendNotification\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "permissions",
+              "description": "The permissions required to execute this function.\nBehavior: Each entry uses the Arcana permission model\n(sapphillon.arcana.v1.Permission). Must be sorted in ascending order by\n(kind, target) before serialization.",
+              "label": "repeated",
+              "type": "Permission",
+              "longType": "Permission",
+              "fullType": "sapphillon.arcana.v1.Permission",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "Permission",
+          "longName": "Permission",
+          "fullName": "sapphillon.arcana.v1.Permission",
+          "description": "Describes a single runtime permission required by a plugin function, following the Deno permission model.\nEach permission pairs a `kind` (the capability category) with a `target` (the\nscoped resource the capability applies to).\n\nFields:\n- kind: The capability category (e.g., \"read\", \"write\", \"net\", \"run\", \"env\", \"sys\", \"ffi\").\n- target: The resource the capability is scoped to, interpreted per `kind`.\n\nExample:\n```proto\n  Permission {\n    kind: \"net\"\n    target: \"registry.npmjs.org\"\n  }\n```",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "kind",
+              "description": "The capability category this permission authorizes.\nBehavior: Required. Validated against the Deno-aligned whitelist during static\nanalysis (sapphillon-cli check).\nFormat: One of \"read\", \"write\", \"net\", \"run\", \"env\", \"sys\", \"ffi\".\nExample: \"net\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "target",
+              "description": "The resource the capability is scoped to, interpreted according to `kind`.\nBehavior: Optional for broadly-scoped kinds; use \"*\" to grant the full scope of\nthe kind. Semantics by kind: filesystem path (read/write), host (net), command\n(run), variable name (env), API kind (sys), ABI path (ffi).\nExample: \"registry.npmjs.org\", \"/etc/hosts\", \"*\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        }
+      ],
+      "services": []
+    },
+    {
+      "name": "sapphillon/arcana/v1/manifest.proto",
+      "description": "",
+      "package": "sapphillon.arcana.v1",
+      "hasEnums": true,
+      "hasExtensions": false,
+      "hasMessages": true,
+      "hasServices": false,
+      "enums": [
+        {
+          "name": "JSValueType",
+          "longName": "JSValueType",
+          "fullName": "sapphillon.arcana.v1.JSValueType",
+          "description": "JavaScript value types that can be associated with an IODefinition.\nValues:\n- JS_VALUE_TYPE_UNSPECIFIED: Default value. Do not use.\n- JS_VALUE_TYPE_OBJECT: A plain object value.\n- JS_VALUE_TYPE_ARRAY: An array value.\n- JS_VALUE_TYPE_STRING: A string value.\n- JS_VALUE_TYPE_NUMBER: A number value.\n- JS_VALUE_TYPE_BOOLEAN: A boolean value.",
+          "values": [
+            {
+              "name": "JS_VALUE_TYPE_UNSPECIFIED",
+              "number": "0",
+              "description": "Default value. Do not use."
+            },
+            {
+              "name": "JS_VALUE_TYPE_OBJECT",
+              "number": "1",
+              "description": "A plain object value."
+            },
+            {
+              "name": "JS_VALUE_TYPE_ARRAY",
+              "number": "2",
+              "description": "An array value."
+            },
+            {
+              "name": "JS_VALUE_TYPE_STRING",
+              "number": "3",
+              "description": "A string value."
+            },
+            {
+              "name": "JS_VALUE_TYPE_NUMBER",
+              "number": "4",
+              "description": "A number value."
+            },
+            {
+              "name": "JS_VALUE_TYPE_BOOLEAN",
+              "number": "5",
+              "description": "A boolean value."
+            }
+          ]
+        }
+      ],
+      "extensions": [],
+      "messages": [
+        {
+          "name": "FunctionDefinition",
+          "longName": "FunctionDefinition",
+          "fullName": "sapphillon.arcana.v1.FunctionDefinition",
+          "description": "Represents a single function exposed by the plugin, including JSDoc-extracted metadata such as permissions, parameters, and return value.\n\nFields:\n- name: The name of the function.\n- description: A short description of what the function does and when to use it.\n- permissions: The permissions required to execute this function.\n- params: The function parameters (arguments), in declaration order.\n- returns: The function return value, if any.\n\nExample:\n```proto\n  FunctionDefinition {\n    name: \"sendNotification\"\n    description: \"Sends a message to a configured channel\"\n    permissions: [{ kind: \"net\", target: \"*\" }]\n    params: [{ type: JS_VALUE_TYPE_STRING, name: \"channelId\", description: \"Target channel\" }]\n    returns: { type: JS_VALUE_TYPE_BOOLEAN, name: \"success\", description: \"True if sent\" }\n  }\n```",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": true,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "name",
+              "description": "The name of the function.\nBehavior: Required. Must be unique within the plugin package. Used as the stable identifier for invoking the function at runtime.\nExample: \"sendNotification\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "description",
+              "description": "A short description of what the function does and when to use it.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "permissions",
+              "description": "The permissions required to execute this function.\nBehavior: Extracted from JSDoc @permission tags at build time. Each entry uses\nthe Arcana permission model (sapphillon.arcana.v1.Permission), which is distinct\nfrom the workflow permission model in sapphillon.v1.Permission. Validated during\nstatic analysis (sapphillon-cli check).",
+              "label": "repeated",
+              "type": "Permission",
+              "longType": "Permission",
+              "fullType": "sapphillon.arcana.v1.Permission",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "params",
+              "description": "The function parameters (arguments), in declaration order.\nBehavior: Extracted from JSDoc @param tags.",
+              "label": "repeated",
+              "type": "IODefinition",
+              "longType": "IODefinition",
+              "fullType": "sapphillon.arcana.v1.IODefinition",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "returns",
+              "description": "The function return value.\nBehavior: Extracted from JSDoc @returns tags. Optional; left unset for void\nfunctions. Singular because a JavaScript function returns at most one value —\ntuple-like returns are expressed as a single object or array value whose\n`type` is JS_VALUE_TYPE_OBJECT or JS_VALUE_TYPE_ARRAY.",
+              "label": "optional",
+              "type": "IODefinition",
+              "longType": "IODefinition",
+              "fullType": "sapphillon.arcana.v1.IODefinition",
+              "ismap": false,
+              "isoneof": true,
+              "oneofdecl": "_returns",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "IODefinition",
+          "longName": "IODefinition",
+          "fullName": "sapphillon.arcana.v1.IODefinition",
+          "description": "Represents a single input/output variable definition, analogous to JSDoc @param or @returns tags.\n\nFields:\n- type: The JavaScript value type of the variable.\n- name: The variable name of the parameter or return value.\n- description: A short description of what the variable represents.\n\nExample:\n```proto\n  IODefinition {\n    type: JS_VALUE_TYPE_STRING\n    name: \"userId\"\n    description: \"The unique identifier of the user\"\n  }\n```",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "type",
+              "description": "The JavaScript value type of the variable.\nBehavior: Enumerated type that classifies the value into one of the runtime JS\nprimitives (object, array, string, number, boolean). Replaces the legacy\nfree-form string type so that I/O types are machine-checkable during static\nanalysis (sapphillon-cli check).",
+              "label": "",
+              "type": "JSValueType",
+              "longType": "JSValueType",
+              "fullType": "sapphillon.arcana.v1.JSValueType",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "name",
+              "description": "The variable name of the parameter or return value.\nExample: \"userId\", \"message\", \"options\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "description",
+              "description": "A short description of what the variable represents.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "PluginManifest",
+          "longName": "PluginManifest",
+          "fullName": "sapphillon.arcana.v1.PluginManifest",
+          "description": "The complete runtime metadata embedded into package.js at build time. Combines the static PackageConfig from package.toml with dynamic FunctionDefinitions extracted from JSDoc.\n\nThe manifest is serialized into a `/* @arcana-manifest {...} */` comment block\ninside the bundled package.js. During package verification, the client MUST\nconfirm that the metadata embedded here matches the repository index (e.g.,\npermission lists) exactly; any mismatch aborts the installation.\n\nFields:\n- package_config: The static package configuration sourced from package.toml.\n- functions: The functions exposed by this plugin.\n\nExample:\n```proto\n  PluginManifest {\n    package_config: { id: \"my-plugin\", name: \"My Plugin\", version: \"1.0.0\", ... }\n    functions: [{ name: \"sendNotification\", ... }]\n  }\n```",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "package_config",
+              "description": "The static package configuration sourced from package.toml.\nSee PackageConfig.",
+              "label": "",
+              "type": "PackageConfig",
+              "longType": "PackageConfig",
+              "fullType": "sapphillon.arcana.v1.PackageConfig",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "functions",
+              "description": "The functions exposed by this plugin.\nBehavior: Extracted from JSDoc at build time and merged with the static configuration to form the complete manifest.",
+              "label": "repeated",
+              "type": "FunctionDefinition",
+              "longType": "FunctionDefinition",
+              "fullType": "sapphillon.arcana.v1.FunctionDefinition",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        }
+      ],
+      "services": []
+    },
+    {
+      "name": "sapphillon/v1/semver.proto",
+      "description": "",
+      "package": "sapphillon.v1",
+      "hasEnums": false,
+      "hasExtensions": false,
+      "hasMessages": true,
+      "hasServices": false,
+      "enums": [],
+      "extensions": [],
+      "messages": [
+        {
+          "name": "SemanticVersion",
+          "longName": "SemanticVersion",
+          "fullName": "sapphillon.v1.SemanticVersion",
+          "description": "Represents a structured Semantic Versioning 2.0.0 version.\nFollows the spec at https://semver.org. Encodes the version as discrete\nnumeric components plus optional pre-release and build metadata strings so\nconsumers can compare versions programmatically without re-parsing text.\n\nFields:\n- major: The major version component.\n- minor: The minor version component.\n- patch: The patch version component.\n- prerelease: The optional pre-release identifier.\n- build: The optional build metadata identifier.\n\nExample:\n```proto\n  SemanticVersion {\n    major: 1\n    minor: 2\n    patch: 3\n    prerelease: \"alpha.1\"\n    build: \"exp.sha.5114f85\"\n  }\n```",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "major",
+              "description": "The major version component.\nBehavior: MUST be incremented when making incompatible API changes.\nTogether with `minor`, it forms the public API version pair.\nExample: 1.",
+              "label": "",
+              "type": "uint32",
+              "longType": "uint32",
+              "fullType": "uint32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "minor",
+              "description": "The minor version component.\nBehavior: MUST be incremented when adding backwards-compatible functionality,\nand MUST be reset to 0 when `major` is incremented.\nExample: 2.",
+              "label": "",
+              "type": "uint32",
+              "longType": "uint32",
+              "fullType": "uint32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "patch",
+              "description": "The patch version component.\nBehavior: MUST be incremented when making backwards-compatible bug fixes,\nand MUST be reset to 0 when `minor` (or `major`) is incremented.\nExample: 3.",
+              "label": "",
+              "type": "uint32",
+              "longType": "uint32",
+              "fullType": "uint32",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "prerelease",
+              "description": "The optional pre-release identifier, following semver.org pre-release syntax.\nBehavior: A version with a non-empty `prerelease` has lower precedence than\nthe same version without one (e.g., 1.0.0-alpha \u003c 1.0.0). May be empty.\nFormat: Dot-separated identifiers (e.g., \"alpha.1\", \"0.3.7\", \"beta-2\").",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "build",
+              "description": "The optional build metadata identifier, following semver.org build metadata syntax.\nBehavior: Build metadata MUST be ignored when determining version precedence,\nso 1.0.0+build1 and 1.0.0+build2 are equivalent. May be empty.\nFormat: Dot-separated identifiers (e.g., \"exp.sha.5114f85\", \"20130313144700\").",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        }
+      ],
+      "services": []
+    },
+    {
+      "name": "sapphillon/arcana/v1/repository.proto",
+      "description": "",
+      "package": "sapphillon.arcana.v1",
+      "hasEnums": false,
+      "hasExtensions": false,
+      "hasMessages": true,
+      "hasServices": false,
+      "enums": [],
+      "extensions": [],
+      "messages": [
+        {
+          "name": "PackageOverride",
+          "longName": "PackageOverride",
+          "fullName": "sapphillon.arcana.v1.PackageOverride",
+          "description": "A single admin-signed lifecycle override for one package target.\nIdentified by `target_path`; each flag overrides the corresponding lifecycle\nstate that the developer-signed TargetCustom cannot change after publication.\n\nFields:\n- target_path: The TUF target path being overridden.\n- yanked: Whether the target has been yanked.\n- yank_reason: The reason for the yank.\n- deprecated: Whether the target is deprecated.\n- deprecated_message: The deprecation message shown to users.\n- abandoned: Whether the target is considered abandoned.\n- advisory_url: URL of a related security advisory.\n- updated_at: When this override was last updated.\n\nExample:\n```proto\n  PackageOverride {\n    target_path: \"packages/alice/my-plugin/1.0.0/package.js\"\n    yanked: true\n    yank_reason: \"Remote code execution vulnerability\"\n    advisory_url: \"https://github.com/user/my-plugin/security/advisories/GHSA-xxxx\"\n    updated_at: { seconds: 1738324800 }\n  }\n```",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "target_path",
+              "description": "The TUF target path this override applies to.\nBehavior: Must uniquely identify a published target.\nFormat: \"packages/\u003cauthor\u003e/\u003cpackage\u003e/\u003cversion\u003e/package.js\".\nExample: \"packages/alice/my-plugin/1.0.0/package.js\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "yanked",
+              "description": "Whether the target has been yanked.\nBehavior: When true, clients MUST refuse new installs of this version.\nAlready-installed copies are unaffected.",
+              "label": "",
+              "type": "bool",
+              "longType": "bool",
+              "fullType": "bool",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "yank_reason",
+              "description": "The reason the target was yanked.\nBehavior: Only meaningful when `yanked` is true.\nExample: \"Remote code execution vulnerability\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "deprecated",
+              "description": "Whether the target is deprecated.\nBehavior: When true, UIs should warn against new installs but need not block them.",
+              "label": "",
+              "type": "bool",
+              "longType": "bool",
+              "fullType": "bool",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "deprecated_message",
+              "description": "The deprecation message shown to users.\nBehavior: Only meaningful when `deprecated` is true.\nExample: \"Use my-plugin v2.x instead\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "abandoned",
+              "description": "Whether the target is considered abandoned (no longer maintained).\nBehavior: Advisory only; does not block installation.",
+              "label": "",
+              "type": "bool",
+              "longType": "bool",
+              "fullType": "bool",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "advisory_url",
+              "description": "The URL of a related security advisory.\nBehavior: Optional. Surface in UIs alongside yank/deprecation warnings.\nExample: \"https://github.com/user/my-plugin/security/advisories/GHSA-xxxx\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "updated_at",
+              "description": "When this override was last updated.\nBehavior: Encoded as a well-typed google.protobuf.Timestamp rather than an\nRFC 3339 string, so consumers do not need to re-parse the timestamp text.\nExample: { seconds: 1738324800, nanos: 0 } for \"2025-01-31T12:00:00Z\".",
+              "label": "",
+              "type": "Timestamp",
+              "longType": "google.protobuf.Timestamp",
+              "fullType": "google.protobuf.Timestamp",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "RepoOverrideIndex",
+          "longName": "RepoOverrideIndex",
+          "fullName": "sapphillon.arcana.v1.RepoOverrideIndex",
+          "description": "Admin-signed overlay that carries package lifecycle state (yank, deprecation, abandonment) outside the developer-signed TargetCustom.\nSerialized as a direct target named \"repo-policy/overrides.json\" inside\ntargets.json and signed with the repository's targets (admin) key — it is NOT a\ndelegated target.\n\nKeeping lifecycle state in an admin-controlled overlay means a package can be\nyanked or deprecated without re-signing the developer's TargetCustom block.\n\nFields:\n- overrides: The per-package override entries.\n- arcana_schema_version: The Arcana schema version.\n\nExample:\n```proto\n  RepoOverrideIndex {\n    overrides: [{ target_path: \"packages/alice/my-plugin/1.0.0/package.js\", yanked: true, yank_reason: \"security\" }]\n    arcana_schema_version: \"v1\"\n  }\n```",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "overrides",
+              "description": "The per-package override entries.\nBehavior: Should be sorted in ascending order by `target_path` before serialization.",
+              "label": "repeated",
+              "type": "PackageOverride",
+              "longType": "PackageOverride",
+              "fullType": "sapphillon.arcana.v1.PackageOverride",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "arcana_schema_version",
+              "description": "The Arcana schema version this overlay conforms to.\nBehavior: Distinct from the TUF `spec_version`.\nExample: \"v1\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "name": "TargetCustom",
+          "longName": "TargetCustom",
+          "fullName": "sapphillon.arcana.v1.TargetCustom",
+          "description": "Per-version package metadata stored as the developer-signed `Target.custom[\"sapphillon\"]` block inside a TUF target.\nMirrors the static metadata from package.toml plus the function-level permission\nsnapshot. The developer signs this block with their Minisign key; the client\nverifies it against the author public key advertised out-of-band before install.\n\nOnce a (package_id, version) pair is registered, TargetCustom is immutable;\nlifecycle changes (yank, deprecation, abandonment) are applied via PackageOverride\ninstead of by mutating this block, so the developer signature stays stable.\n\nFields:\n- package_id: The stable unique identifier of the package.\n- package_name: The human-friendly display name of the package.\n- version: The SemVer version of this target, broken into structured components.\n- description: A short summary of the package's purpose.\n- author_github_id: The GitHub username of the representative author.\n- download_url: The external download URL for `package.js`.\n- function_permissions: The function-level permission snapshot for this version.\n- tags: Tags for categorization and discoverability.\n- homepage_url: Optional URL to homepage or documentation.\n- arcana_schema_version: The Arcana schema version (distinct from the TUF spec_version).\n- github_numeric_id: Optional immutable GitHub numeric user id for ownership verification.\n\nExample:\n```proto\n  TargetCustom {\n    package_id: \"my-plugin\"\n    package_name: \"My Plugin\"\n    version: { major: 1, minor: 0, patch: 0 }\n    download_url: \"https://registry.example.com/packages/my-plugin/1.0.0/package.js\"\n    function_permissions: [{ function_name: \"sendNotification\", permissions: [{ kind: \"net\", target: \"*\" }] }]\n  }\n```",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": true,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "package_id",
+              "description": "The stable unique identifier of the package.\nBehavior: Immutable once registered. Combined with `version`, it forms the\nunique target identity.\nFormat: Lowercase, hyphen-separated identifier (e.g., \"my-plugin\").",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "package_name",
+              "description": "The human-friendly display name of the package.\nExample: \"My Plugin\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "version",
+              "description": "The structured semantic version of this target.\nBehavior: Encoded as a structured SemanticVersion (https://semver.org) instead\nof a free-form string so consumers can compare versions programmatically.\nTogether with `package_id`, the (package_id, version) pair is immutable once\npublished; re-publishing the same pair is prohibited.\nExample: { major: 1, minor: 0, patch: 0 } for \"1.0.0\".",
+              "label": "",
+              "type": "SemanticVersion",
+              "longType": "sapphillon.v1.SemanticVersion",
+              "fullType": "sapphillon.v1.SemanticVersion",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "description",
+              "description": "A short summary of the package's purpose and capabilities.",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "author_github_id",
+              "description": "The GitHub username of the package's representative author/owner.\nBehavior: Singular. Used for ownership attribution and cross-referenced with\nthe developer's Minisign public key during verification. Prefer the immutable\n`github_numeric_id` as the ownership anchor because usernames can be renamed.\nExample: \"alice\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "download_url",
+              "description": "The external download URL for the bundled `package.js`.\nHosting is decoupled from the TUF repository: the target points at an external\nlocation (e.g., a CDN or GitHub release asset) that serves the signed artifact.\nExample: \"https://registry.example.com/packages/my-plugin/1.0.0/package.js\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "function_permissions",
+              "description": "The function-level permission snapshot for this version.\nBehavior: Used by the manifest consistency check during verification — the\nclient MUST confirm these match the permissions embedded in the downloaded\npackage.js manifest exactly; any mismatch aborts the installation.\nMust be sorted in ascending order by `function_name` before serialization.",
+              "label": "repeated",
+              "type": "FunctionPermissionMeta",
+              "longType": "FunctionPermissionMeta",
+              "fullType": "sapphillon.arcana.v1.FunctionPermissionMeta",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "tags",
+              "description": "The list of tags for categorization and discoverability.\nExample: [\"automation\", \"utility\", \"ai\"].",
+              "label": "repeated",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "homepage_url",
+              "description": "Optional URL to the package's homepage, documentation, or source repository.\nBehavior: Optional. If omitted, no homepage is linked.\nExample: \"https://github.com/user/my-plugin\".",
+              "label": "optional",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": true,
+              "oneofdecl": "_homepage_url",
+              "defaultValue": ""
+            },
+            {
+              "name": "arcana_schema_version",
+              "description": "The Arcana schema version this target conforms to.\nBehavior: Distinct from the TUF `spec_version`; used by the toolchain to select\nthe correct deserialization and validation rules.\nExample: \"v1\".",
+              "label": "",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
+            },
+            {
+              "name": "github_numeric_id",
+              "description": "The immutable GitHub numeric user id used for ownership verification.\nBehavior: Optional but recommended. Unlike `author_github_id`, this numeric id\nnever changes when a user is renamed, so it serves as the stable ownership anchor.\nExample: \"12345678\".",
+              "label": "optional",
+              "type": "string",
+              "longType": "string",
+              "fullType": "string",
+              "ismap": false,
+              "isoneof": true,
+              "oneofdecl": "_github_numeric_id",
+              "defaultValue": ""
+            }
+          ]
+        }
+      ],
+      "services": []
     },
     {
       "name": "sapphillon/v1/permission.proto",
@@ -1236,7 +2077,7 @@
             },
             {
               "name": "permissions",
-              "description": "Permissions that are allowed when invoking the specified plugin function.\nPrefer specific Permission.resource and Permission.action combinations to minimize scope.\nExample:\n  permissions: [ { resource: \"secrets/my-secret\", action: READ } ]",
+              "description": "Permissions that are allowed when invoking the specified plugin function.\nPrefer specific Permission.resource and Permission.action combinations to minimize scope.\nExample:\n```proto\n  permissions: [ { resource: \"secrets/my-secret\", action: READ } ]\n```",
               "label": "repeated",
               "type": "Permission",
               "longType": "Permission",
@@ -1252,7 +2093,7 @@
           "name": "Permission",
           "longName": "Permission",
           "fullName": "sapphillon.v1.Permission",
-          "description": "Describes a single permission requirement or grant for a specific resource.\nUsage:\n- Include in APIs (e.g., workflow or plugin definitions) to declare needed permissions.\n- Use in policy evaluation to check whether a caller is authorized.\n\nFields:\n- display_name: Human-readable name shown in UIs (e.g., \"Read File\").\n- description: Longer explanation of the permission's purpose.\n- permission_type: Action category (read, write, execute).\n- resource: Resource identifiers this permission applies to. Free-form in v1.\n- permission_level: Sensitivity level to inform review and approval.\n\nExample:\n  Permission {\n    display_name: \"Execute Workflow\"\n    description: \"Runs the daily ETL pipeline\"\n    permission_type: PERMISSION_TYPE_EXECUTE\n    resource: [\"workflows/etl_daily\"]\n    permission_level: PERMISSION_LEVEL_HIGH\n  }\n\nField behavior notes:\n- display_name: Recommended.\n- description: Recommended.\n- permission_type: Required.\n- resource: Optional; when omitted applies broadly.\n- permission_level: Recommended; some features may require it.",
+          "description": "Describes a single permission requirement or grant for a specific resource.\nUsage:\n- Include in APIs (e.g., workflow or plugin definitions) to declare needed permissions.\n- Use in policy evaluation to check whether a caller is authorized.\n\nFields:\n- display_name: Human-readable name shown in UIs (e.g., \"Read File\").\n- description: Longer explanation of the permission's purpose.\n- permission_type: Action category (read, write, execute).\n- resource: Resource identifiers this permission applies to. Free-form in v1.\n- permission_level: Sensitivity level to inform review and approval.\n\nExample:\n```proto\n  Permission {\n    display_name: \"Execute Workflow\"\n    description: \"Runs the daily ETL pipeline\"\n    permission_type: PERMISSION_TYPE_EXECUTE\n    resource: [\"workflows/etl_daily\"]\n    permission_level: PERMISSION_LEVEL_HIGH\n  }\n```\n\nField behavior notes:\n- display_name: Recommended.\n- description: Recommended.\n- permission_type: Required.\n- resource: Optional; when omitted applies broadly.\n- permission_level: Recommended; some features may require it.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -1338,7 +2179,7 @@
           "name": "FunctionDefine",
           "longName": "FunctionDefine",
           "fullName": "sapphillon.v1.FunctionDefine",
-          "description": "Represents the function definition including JSDoc-style documentation.\nStores the function parameters and return value information.\n\nFields:\n- parameters: The list of function parameters (arguments).\n- returns: The return value information.\n\nExample:\n  FunctionDefine {\n    parameters: [\n      { name: \"channelId\", type: \"string\", description: \"Target channel ID\" },\n      { name: \"message\", type: \"string\", description: \"Message content\" }\n    ]\n    returns: [{ name: \"result\", type: \"boolean\", description: \"True if sent successfully\" }]\n  }",
+          "description": "Represents the function definition including JSDoc-style documentation.\nStores the function parameters and return value information.\n\nFields:\n- parameters: The list of function parameters (arguments).\n- returns: The return value information.\n\nExample:\n```proto\n  FunctionDefine {\n    parameters: [\n      { name: \"channelId\", type: \"string\", description: \"Target channel ID\" },\n      { name: \"message\", type: \"string\", description: \"Message content\" }\n    ]\n    returns: [{ name: \"result\", type: \"boolean\", description: \"True if sent successfully\" }]\n  }\n```",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -1374,7 +2215,7 @@
           "name": "FunctionParameter",
           "longName": "FunctionParameter",
           "fullName": "sapphillon.v1.FunctionParameter",
-          "description": "Represents a single parameter (argument or return value) of a function.\nStores the variable name, type, and description similar to JSDoc @param or @returns.\n\nFields:\n- name: The variable name of the parameter.\n- type: The type of the parameter (e.g., \"string\", \"number\", \"object\").\n- description: A short description of what the parameter represents.\n\nExample:\n  FunctionParameter {\n    name: \"userId\"\n    type: \"string\"\n    description: \"The unique identifier of the user\"\n  }",
+          "description": "Represents a single parameter (argument or return value) of a function.\nStores the variable name, type, and description similar to JSDoc @param or @returns.\n\nFields:\n- name: The variable name of the parameter.\n- type: The type of the parameter (e.g., \"string\", \"number\", \"object\").\n- description: A short description of what the parameter represents.\n\nExample:\n```proto\n  FunctionParameter {\n    name: \"userId\"\n    type: \"string\"\n    description: \"The unique identifier of the user\"\n  }\n```",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -1422,7 +2263,7 @@
           "name": "PluginFunction",
           "longName": "PluginFunction",
           "fullName": "sapphillon.v1.PluginFunction",
-          "description": "Describes a callable function exposed by a plugin.\nA function declares its purpose, identity, and required permissions for execution.\n\nFields:\n- function_id: Stable unique identifier used by systems to reference the function.\n- function_name: Human-friendly name suitable for UIs.\n- description: Summary of what the function does and typical use cases.\n- permissions: Permissions required for the caller to execute this function.\n- function_define: JSDoc-style definition with parameters and return value.\n\nExample:\n  PluginFunction {\n    function_id: \"send_notification\"\n    function_name: \"Send Notification\"\n    description: \"Sends a message to a configured channel\"\n    permissions: [{ permission_type: PERMISSION_TYPE_EXECUTE, resource: [\"channels/general\"] }]\n    function_define: {\n      parameters: [{ name: \"channelId\", type: \"string\", description: \"Target channel\" }]\n      returns: [{ name: \"success\", type: \"boolean\", description: \"True if sent\" }]\n    }\n  }",
+          "description": "Describes a callable function exposed by a plugin.\nA function declares its purpose, identity, and required permissions for execution.\n\nFields:\n- function_id: Stable unique identifier used by systems to reference the function.\n- function_name: Human-friendly name suitable for UIs.\n- description: Summary of what the function does and typical use cases.\n- permissions: Permissions required for the caller to execute this function.\n- function_define: JSDoc-style definition with parameters and return value.\n\nExample:\n```proto\n  PluginFunction {\n    function_id: \"send_notification\"\n    function_name: \"Send Notification\"\n    description: \"Sends a message to a configured channel\"\n    permissions: [{ permission_type: PERMISSION_TYPE_EXECUTE, resource: [\"channels/general\"] }]\n    function_define: {\n      parameters: [{ name: \"channelId\", type: \"string\", description: \"Target channel\" }]\n      returns: [{ name: \"success\", type: \"boolean\", description: \"True if sent\" }]\n    }\n  }\n```",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -1506,7 +2347,7 @@
           "name": "PluginPackage",
           "longName": "PluginPackage",
           "fullName": "sapphillon.v1.PluginPackage",
-          "description": "Represents a plugin package that can be installed into the platform.\nA plugin groups one or more functions and includes metadata useful for discovery and governance.\n\nFields:\n- package_id: Stable unique identifier of the plugin package.\n- package_name: Human-friendly name of the plugin.\n- package_version: Semantic version string (e.g., \"1.2.3\").\n- description: Summary of the plugin's purpose and capabilities.\n- functions: Functions exposed by this plugin.\n- plugin_store_url: URL to the plugin page or documentation.\n- internal_plugin: Indicates whether the plugin is internal-only.\n- verified: Indicates whether the plugin is verified by the platform.\n\n- deprecated: Indicates whether the plugin is deprecated and should not be used for new workflows.\n- installed_at: Time when the plugin was installed.\n- updated_at: Time when the plugin was last updated.\n\nExample:\n  PluginPackage {\n    package_id: \"notifications\"\n    package_name: \"Notifications\"\n    package_version: \"1.4.0\"\n    description: \"Provides functions for sending notifications\"\n    plugin_store_url: \"https://plugins.example.com/notifications\"\n    verified: true\n    provider_id: \"com.example\"\n    functions: [{ function_id: \"send_notification\", ... }]\n  }",
+          "description": "Represents a plugin package that can be installed into the platform.\nA plugin groups one or more functions and includes metadata useful for discovery and governance.\n\nFields:\n- package_id: Stable unique identifier of the plugin package.\n- package_name: Human-friendly name of the plugin.\n- package_version: Semantic version string (e.g., \"1.2.3\").\n- description: Summary of the plugin's purpose and capabilities.\n- functions: Functions exposed by this plugin.\n- plugin_store_url: URL to the plugin page or documentation.\n- internal_plugin: Indicates whether the plugin is internal-only.\n- verified: Indicates whether the plugin is verified by the platform.\n\n- deprecated: Indicates whether the plugin is deprecated and should not be used for new workflows.\n- installed_at: Time when the plugin was installed.\n- updated_at: Time when the plugin was last updated.\n\nExample:\n```proto\n  PluginPackage {\n    package_id: \"notifications\"\n    package_name: \"Notifications\"\n    package_version: \"1.4.0\"\n    description: \"Provides functions for sending notifications\"\n    plugin_store_url: \"https://plugins.example.com/notifications\"\n    verified: true\n    provider_id: \"com.example\"\n    functions: [{ function_id: \"send_notification\", ... }]\n  }\n```",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": true,
@@ -1804,7 +2645,7 @@
             },
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -1852,7 +2693,7 @@
           "fields": [
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -2411,22 +3252,22 @@
           "name": "OrderByDirection",
           "longName": "OrderByDirection",
           "fullName": "sapphillon.v1.OrderByDirection",
-          "description": "Sort direction",
+          "description": "Sort direction.",
           "values": [
             {
               "name": "ORDER_BY_DIRECTION_UNSPECIFIED",
               "number": "0",
-              "description": ""
+              "description": "Default value. Do not use."
             },
             {
               "name": "ORDER_BY_DIRECTION_ASC",
               "number": "1",
-              "description": "Ascending"
+              "description": "Ascending."
             },
             {
               "name": "ORDER_BY_DIRECTION_DESC",
               "number": "2",
-              "description": "Descending"
+              "description": "Descending."
             }
           ]
         }
@@ -2437,7 +3278,7 @@
           "name": "DeleteWorkflowRequest",
           "longName": "DeleteWorkflowRequest",
           "fullName": "sapphillon.v1.DeleteWorkflowRequest",
-          "description": "",
+          "description": "Request message for deleting a workflow.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -2445,7 +3286,7 @@
           "fields": [
             {
               "name": "workflow_id",
-              "description": "",
+              "description": "The ID of the workflow to delete.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -2461,7 +3302,7 @@
           "name": "DeleteWorkflowResponse",
           "longName": "DeleteWorkflowResponse",
           "fullName": "sapphillon.v1.DeleteWorkflowResponse",
-          "description": "",
+          "description": "Response message for deleting a workflow.\nIntentionally empty to allow future extensibility.",
           "hasExtensions": false,
           "hasFields": false,
           "hasOneofs": false,
@@ -2628,7 +3469,7 @@
           "name": "GetWorkflowRequest",
           "longName": "GetWorkflowRequest",
           "fullName": "sapphillon.v1.GetWorkflowRequest",
-          "description": "",
+          "description": "Request message for retrieving a workflow by its ID.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -2636,7 +3477,7 @@
           "fields": [
             {
               "name": "workflow_id",
-              "description": "",
+              "description": "The ID of the workflow to retrieve.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -2652,7 +3493,7 @@
           "name": "GetWorkflowResponse",
           "longName": "GetWorkflowResponse",
           "fullName": "sapphillon.v1.GetWorkflowResponse",
-          "description": "",
+          "description": "Response message for retrieving a workflow.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -2660,7 +3501,7 @@
           "fields": [
             {
               "name": "workflow",
-              "description": "",
+              "description": "The requested workflow definition.",
               "label": "",
               "type": "Workflow",
               "longType": "Workflow",
@@ -2672,7 +3513,7 @@
             },
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -2688,7 +3529,7 @@
           "name": "ListWorkflowsFilter",
           "longName": "ListWorkflowsFilter",
           "fullName": "sapphillon.v1.ListWorkflowsFilter",
-          "description": "",
+          "description": "Filter criteria for listing workflows.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -2696,7 +3537,7 @@
           "fields": [
             {
               "name": "display_name",
-              "description": "",
+              "description": "Filters workflows by display name. Supports exact and partial matching.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -2708,7 +3549,7 @@
             },
             {
               "name": "workflow_language",
-              "description": "",
+              "description": "Filters workflows by language.",
               "label": "",
               "type": "WorkflowLanguage",
               "longType": "WorkflowLanguage",
@@ -2724,7 +3565,7 @@
           "name": "ListWorkflowsRequest",
           "longName": "ListWorkflowsRequest",
           "fullName": "sapphillon.v1.ListWorkflowsRequest",
-          "description": "",
+          "description": "Request message for listing workflows.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -2732,7 +3573,7 @@
           "fields": [
             {
               "name": "page_size",
-              "description": "",
+              "description": "The maximum number of workflows to return. The service may return fewer\nthan this value. If zero, the server will pick an appropriate default.",
               "label": "",
               "type": "int32",
               "longType": "int32",
@@ -2744,7 +3585,7 @@
             },
             {
               "name": "page_token",
-              "description": "",
+              "description": "A page token, received from a previous `ListWorkflows` call.\nProvide this to retrieve the subsequent page.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -2756,7 +3597,7 @@
             },
             {
               "name": "filter",
-              "description": "",
+              "description": "Filter criteria for the listed workflows.",
               "label": "",
               "type": "ListWorkflowsFilter",
               "longType": "ListWorkflowsFilter",
@@ -2768,7 +3609,7 @@
             },
             {
               "name": "order_by",
-              "description": "",
+              "description": "Ordering clauses for the listed workflows.",
               "label": "repeated",
               "type": "OrderByClause",
               "longType": "OrderByClause",
@@ -2784,7 +3625,7 @@
           "name": "ListWorkflowsResponse",
           "longName": "ListWorkflowsResponse",
           "fullName": "sapphillon.v1.ListWorkflowsResponse",
-          "description": "",
+          "description": "Response message for listing workflows.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -2792,7 +3633,7 @@
           "fields": [
             {
               "name": "workflows",
-              "description": "",
+              "description": "The matching workflows.",
               "label": "repeated",
               "type": "Workflow",
               "longType": "Workflow",
@@ -2804,7 +3645,7 @@
             },
             {
               "name": "next_page_token",
-              "description": "",
+              "description": "A token to retrieve the next page of results. If this field is empty,\nthere are no more results.",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -2816,7 +3657,7 @@
             },
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -2832,7 +3673,7 @@
           "name": "OrderByClause",
           "longName": "OrderByClause",
           "fullName": "sapphillon.v1.OrderByClause",
-          "description": "Order by clause",
+          "description": "Order by clause.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -2840,7 +3681,7 @@
           "fields": [
             {
               "name": "field",
-              "description": "Field name to order by (e.g. \"display_name\", \"updated_at\")",
+              "description": "Field name to order by (e.g. \"display_name\", \"updated_at\").",
               "label": "",
               "type": "string",
               "longType": "string",
@@ -2852,7 +3693,7 @@
             },
             {
               "name": "direction",
-              "description": "",
+              "description": "The direction to order by.",
               "label": "",
               "type": "OrderByDirection",
               "longType": "OrderByDirection",
@@ -2940,7 +3781,7 @@
           "name": "UpdateWorkflowRequest",
           "longName": "UpdateWorkflowRequest",
           "fullName": "sapphillon.v1.UpdateWorkflowRequest",
-          "description": "",
+          "description": "Request message for updating a workflow.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -2948,7 +3789,7 @@
           "fields": [
             {
               "name": "workflow",
-              "description": "",
+              "description": "The workflow to update.\nThe workflow's ID and name fields must identify an existing resource.",
               "label": "",
               "type": "Workflow",
               "longType": "Workflow",
@@ -2960,7 +3801,7 @@
             },
             {
               "name": "update_mask",
-              "description": "",
+              "description": "The set of field paths to update.\nIf omitted, all mutable fields will be updated.",
               "label": "",
               "type": "FieldMask",
               "longType": "google.protobuf.FieldMask",
@@ -2976,7 +3817,7 @@
           "name": "UpdateWorkflowResponse",
           "longName": "UpdateWorkflowResponse",
           "fullName": "sapphillon.v1.UpdateWorkflowResponse",
-          "description": "",
+          "description": "Response message for updating a workflow.",
           "hasExtensions": false,
           "hasFields": true,
           "hasOneofs": false,
@@ -2984,7 +3825,7 @@
           "fields": [
             {
               "name": "workflow",
-              "description": "",
+              "description": "The updated workflow definition.",
               "label": "",
               "type": "Workflow",
               "longType": "Workflow",
@@ -2996,7 +3837,7 @@
             },
             {
               "name": "status",
-              "description": "",
+              "description": "The status of the response.\nIf the status is not OK, it indicates an error.",
               "label": "",
               "type": "Status",
               "longType": "google.rpc.Status",
@@ -3090,7 +3931,7 @@
             },
             {
               "name": "GetWorkflow",
-              "description": "",
+              "description": "Retrieves a workflow by its ID.\n\nBehavior:\n- Returns the full workflow definition for the specified ID.\n\nErrors:\n- NOT_FOUND if the requested workflow does not exist.\n- INVALID_ARGUMENT if the workflow_id is empty or malformed.",
               "requestType": "GetWorkflowRequest",
               "requestLongType": "GetWorkflowRequest",
               "requestFullType": "sapphillon.v1.GetWorkflowRequest",
@@ -3102,7 +3943,7 @@
             },
             {
               "name": "ListWorkflows",
-              "description": "",
+              "description": "Lists workflows matching optional filters.\n\nBehavior:\n- Returns a paginated list of workflows.\n- Supports filtering by display_name and workflow_language.\n- Supports sorting by configurable order-by clauses.\n\nErrors:\n- INVALID_ARGUMENT if the page_token is invalid or the filter is malformed.",
               "requestType": "ListWorkflowsRequest",
               "requestLongType": "ListWorkflowsRequest",
               "requestFullType": "sapphillon.v1.ListWorkflowsRequest",
@@ -3114,7 +3955,7 @@
             },
             {
               "name": "UpdateWorkflow",
-              "description": "",
+              "description": "Updates an existing workflow.\n\nBehavior:\n- Only fields specified in the update_mask will be modified.\n- If update_mask is not provided, all fields will be updated.\n\nErrors:\n- NOT_FOUND if the workflow does not exist.\n- INVALID_ARGUMENT if the workflow is malformed or the update_mask contains invalid paths.",
               "requestType": "UpdateWorkflowRequest",
               "requestLongType": "UpdateWorkflowRequest",
               "requestFullType": "sapphillon.v1.UpdateWorkflowRequest",
@@ -3126,7 +3967,7 @@
             },
             {
               "name": "DeleteWorkflow",
-              "description": "",
+              "description": "Deletes a workflow by its ID.\n\nBehavior:\n- Permanently removes the workflow and all associated resources.\n\nErrors:\n- NOT_FOUND if the workflow does not exist.\n- INVALID_ARGUMENT if the workflow_id is empty or malformed.",
               "requestType": "DeleteWorkflowRequest",
               "requestLongType": "DeleteWorkflowRequest",
               "requestFullType": "sapphillon.v1.DeleteWorkflowRequest",

@@ -1,0 +1,30 @@
+---
+title: permission.proto
+hide_title: true
+---
+
+import { ProtoMessage, ProtoServiceMethod, ProtoEnum } from '@theme/ProtoFile';
+
+# `permission.proto`
+_**path** sapphillon/arcana/v1/permission.proto_
+
+_**package** sapphillon.arcana.v1_
+
+
+
+---
+
+## Messages
+
+
+### `FunctionPermissionMeta`
+<ProtoMessage key={0} message={{"name":"FunctionPermissionMeta","longName":"FunctionPermissionMeta","fullName":"sapphillon.arcana.v1.FunctionPermissionMeta","description":"The function-level permission requirements for a specific version of a package.\nUsed by the manifest consistency check: the permissions declared here in the\nrepository index MUST exactly match those embedded in the package.js manifest.\n\nFields:\n- function_name: The name of the function these permissions apply to.\n- permissions: The permissions required to execute this function.\n\nExample:\n```proto\n  FunctionPermissionMeta {\n    function_name: \"sendNotification\"\n    permissions: [{ kind: \"net\", target: \"*\" }]\n  }\n```","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"function_name","description":"The name of the function these permissions apply to.\nBehavior: Must match the `name` of a FunctionDefinition in the package manifest.\nExample: \"sendNotification\".","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"permissions","description":"The permissions required to execute this function.\nBehavior: Each entry uses the Arcana permission model\n(sapphillon.arcana.v1.Permission). Must be sorted in ascending order by\n(kind, target) before serialization.","label":"repeated","type":"Permission","longType":"Permission","fullType":"sapphillon.arcana.v1.Permission","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/arcana/v1/permission.proto#permission"}]}} />
+
+
+### `Permission`
+<ProtoMessage key={1} message={{"name":"Permission","longName":"Permission","fullName":"sapphillon.arcana.v1.Permission","description":"Describes a single runtime permission required by a plugin function, following the Deno permission model.\nEach permission pairs a `kind` (the capability category) with a `target` (the\nscoped resource the capability applies to).\n\nFields:\n- kind: The capability category (e.g., \"read\", \"write\", \"net\", \"run\", \"env\", \"sys\", \"ffi\").\n- target: The resource the capability is scoped to, interpreted per `kind`.\n\nExample:\n```proto\n  Permission {\n    kind: \"net\"\n    target: \"registry.npmjs.org\"\n  }\n```","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"kind","description":"The capability category this permission authorizes.\nBehavior: Required. Validated against the Deno-aligned whitelist during static\nanalysis (sapphillon-cli check).\nFormat: One of \"read\", \"write\", \"net\", \"run\", \"env\", \"sys\", \"ffi\".\nExample: \"net\".","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"target","description":"The resource the capability is scoped to, interpreted according to `kind`.\nBehavior: Optional for broadly-scoped kinds; use \"*\" to grant the full scope of\nthe kind. Semantics by kind: filesystem path (read/write), host (net), command\n(run), variable name (env), API kind (sys), ABI path (ffi).\nExample: \"registry.npmjs.org\", \"/etc/hosts\", \"*\".","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
+
+---
+
+
+  

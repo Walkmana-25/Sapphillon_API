@@ -99,6 +99,8 @@ message ListPluginsResponse {
   // If this field is empty, there are no more results.
   string next_page_token = 2;
 
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 3;
 }
 
@@ -170,5 +172,7 @@ message UninstallPluginRequest {
 
 // Response message for uninstalling a plugin.
 message UninstallPluginResponse {
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 1;
 }

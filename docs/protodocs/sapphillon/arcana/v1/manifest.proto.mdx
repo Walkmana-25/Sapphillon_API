@@ -1,0 +1,41 @@
+---
+title: manifest.proto
+hide_title: true
+---
+
+import { ProtoMessage, ProtoServiceMethod, ProtoEnum } from '@theme/ProtoFile';
+
+# `manifest.proto`
+_**path** sapphillon/arcana/v1/manifest.proto_
+
+_**package** sapphillon.arcana.v1_
+
+
+
+---
+
+## Messages
+
+
+### `FunctionDefinition`
+<ProtoMessage key={0} message={{"name":"FunctionDefinition","longName":"FunctionDefinition","fullName":"sapphillon.arcana.v1.FunctionDefinition","description":"Represents a single function exposed by the plugin, including JSDoc-extracted metadata such as permissions, parameters, and return value.\n\nFields:\n- name: The name of the function.\n- description: A short description of what the function does and when to use it.\n- permissions: The permissions required to execute this function.\n- params: The function parameters (arguments), in declaration order.\n- returns: The function return value, if any.\n\nExample:\n```proto\n  FunctionDefinition {\n    name: \"sendNotification\"\n    description: \"Sends a message to a configured channel\"\n    permissions: [{ kind: \"net\", target: \"*\" }]\n    params: [{ type: JS_VALUE_TYPE_STRING, name: \"channelId\", description: \"Target channel\" }]\n    returns: { type: JS_VALUE_TYPE_BOOLEAN, name: \"success\", description: \"True if sent\" }\n  }\n```","hasExtensions":false,"hasFields":true,"hasOneofs":true,"extensions":[],"fields":[{"name":"name","description":"The name of the function.\nBehavior: Required. Must be unique within the plugin package. Used as the stable identifier for invoking the function at runtime.\nExample: \"sendNotification\".","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"description","description":"A short description of what the function does and when to use it.","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"permissions","description":"The permissions required to execute this function.\nBehavior: Extracted from JSDoc @permission tags at build time. Each entry uses\nthe Arcana permission model (sapphillon.arcana.v1.Permission), which is distinct\nfrom the workflow permission model in sapphillon.v1.Permission. Validated during\nstatic analysis (sapphillon-cli check).","label":"repeated","type":"Permission","longType":"Permission","fullType":"sapphillon.arcana.v1.Permission","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/arcana/v1/permission.proto#permission"},{"name":"params","description":"The function parameters (arguments), in declaration order.\nBehavior: Extracted from JSDoc @param tags.","label":"repeated","type":"IODefinition","longType":"IODefinition","fullType":"sapphillon.arcana.v1.IODefinition","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/arcana/v1/manifest.proto#iodefinition"},{"name":"returns","description":"The function return value.\nBehavior: Extracted from JSDoc @returns tags. Optional; left unset for void\nfunctions. Singular because a JavaScript function returns at most one value —\ntuple-like returns are expressed as a single object or array value whose\n`type` is JS_VALUE_TYPE_OBJECT or JS_VALUE_TYPE_ARRAY.","label":"optional","type":"IODefinition","longType":"IODefinition","fullType":"sapphillon.arcana.v1.IODefinition","ismap":false,"isoneof":true,"oneofdecl":"_returns","defaultValue":"","typeLink":"/protodocs/sapphillon/arcana/v1/manifest.proto#iodefinition"}]}} />
+
+
+### `IODefinition`
+<ProtoMessage key={1} message={{"name":"IODefinition","longName":"IODefinition","fullName":"sapphillon.arcana.v1.IODefinition","description":"Represents a single input/output variable definition, analogous to JSDoc @param or @returns tags.\n\nFields:\n- type: The JavaScript value type of the variable.\n- name: The variable name of the parameter or return value.\n- description: A short description of what the variable represents.\n\nExample:\n```proto\n  IODefinition {\n    type: JS_VALUE_TYPE_STRING\n    name: \"userId\"\n    description: \"The unique identifier of the user\"\n  }\n```","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"type","description":"The JavaScript value type of the variable.\nBehavior: Enumerated type that classifies the value into one of the runtime JS\nprimitives (object, array, string, number, boolean). Replaces the legacy\nfree-form string type so that I/O types are machine-checkable during static\nanalysis (sapphillon-cli check).","label":"","type":"JSValueType","longType":"JSValueType","fullType":"sapphillon.arcana.v1.JSValueType","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/arcana/v1/manifest.proto#jsvaluetype"},{"name":"name","description":"The variable name of the parameter or return value.\nExample: \"userId\", \"message\", \"options\".","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"description","description":"A short description of what the variable represents.","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
+
+
+### `PluginManifest`
+<ProtoMessage key={2} message={{"name":"PluginManifest","longName":"PluginManifest","fullName":"sapphillon.arcana.v1.PluginManifest","description":"The complete runtime metadata embedded into package.js at build time. Combines the static PackageConfig from package.toml with dynamic FunctionDefinitions extracted from JSDoc.\n\nThe manifest is serialized into a `/* @arcana-manifest {...} */` comment block\ninside the bundled package.js. During package verification, the client MUST\nconfirm that the metadata embedded here matches the repository index (e.g.,\npermission lists) exactly; any mismatch aborts the installation.\n\nFields:\n- package_config: The static package configuration sourced from package.toml.\n- functions: The functions exposed by this plugin.\n\nExample:\n```proto\n  PluginManifest {\n    package_config: { id: \"my-plugin\", name: \"My Plugin\", version: \"1.0.0\", ... }\n    functions: [{ name: \"sendNotification\", ... }]\n  }\n```","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"package_config","description":"The static package configuration sourced from package.toml.\nSee PackageConfig.","label":"","type":"PackageConfig","longType":"PackageConfig","fullType":"sapphillon.arcana.v1.PackageConfig","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/arcana/v1/package_config.proto#packageconfig"},{"name":"functions","description":"The functions exposed by this plugin.\nBehavior: Extracted from JSDoc at build time and merged with the static configuration to form the complete manifest.","label":"repeated","type":"FunctionDefinition","longType":"FunctionDefinition","fullType":"sapphillon.arcana.v1.FunctionDefinition","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/arcana/v1/manifest.proto#functiondefinition"}]}} />
+
+---
+## Enums
+
+
+### `JSValueType`
+<ProtoEnum key={0} enumb={{"name":"JSValueType","longName":"JSValueType","fullName":"sapphillon.arcana.v1.JSValueType","description":"JavaScript value types that can be associated with an IODefinition.\nValues:\n- JS_VALUE_TYPE_UNSPECIFIED: Default value. Do not use.\n- JS_VALUE_TYPE_OBJECT: A plain object value.\n- JS_VALUE_TYPE_ARRAY: An array value.\n- JS_VALUE_TYPE_STRING: A string value.\n- JS_VALUE_TYPE_NUMBER: A number value.\n- JS_VALUE_TYPE_BOOLEAN: A boolean value.","values":[{"name":"JS_VALUE_TYPE_UNSPECIFIED","number":"0","description":"Default value. Do not use."},{"name":"JS_VALUE_TYPE_OBJECT","number":"1","description":"A plain object value."},{"name":"JS_VALUE_TYPE_ARRAY","number":"2","description":"An array value."},{"name":"JS_VALUE_TYPE_STRING","number":"3","description":"A string value."},{"name":"JS_VALUE_TYPE_NUMBER","number":"4","description":"A number value."},{"name":"JS_VALUE_TYPE_BOOLEAN","number":"5","description":"A boolean value."}]}} />
+
+---
+
+
+  

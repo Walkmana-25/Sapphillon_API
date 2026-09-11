@@ -22,7 +22,7 @@ _**package** sapphillon.ai.v1_
 
 
 ### `CreateModelResponse`
-<ProtoMessage key={1} message={{"name":"CreateModelResponse","longName":"CreateModelResponse","fullName":"sapphillon.ai.v1.CreateModelResponse","description":"Response message for creating a model.","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"model","description":"","label":"","type":"Models","longType":"Models","fullType":"sapphillon.ai.v1.Models","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/ai/v1/model.proto#models"},{"name":"status","description":"","label":"","type":"Status","longType":"google.rpc.Status","fullType":"google.rpc.Status","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
+<ProtoMessage key={1} message={{"name":"CreateModelResponse","longName":"CreateModelResponse","fullName":"sapphillon.ai.v1.CreateModelResponse","description":"Response message for creating a model.","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"model","description":"The model resource.","label":"","type":"Models","longType":"Models","fullType":"sapphillon.ai.v1.Models","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/ai/v1/model.proto#models"},{"name":"status","description":"The status of the response.\nIf the status is not OK, it indicates an error.","label":"","type":"Status","longType":"google.rpc.Status","fullType":"google.rpc.Status","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
 
 
 ### `DeleteModelRequest`
@@ -30,7 +30,7 @@ _**package** sapphillon.ai.v1_
 
 
 ### `DeleteModelResponse`
-<ProtoMessage key={3} message={{"name":"DeleteModelResponse","longName":"DeleteModelResponse","fullName":"sapphillon.ai.v1.DeleteModelResponse","description":"Response message for deleting a model.","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"status","description":"","label":"","type":"Status","longType":"google.rpc.Status","fullType":"google.rpc.Status","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
+<ProtoMessage key={3} message={{"name":"DeleteModelResponse","longName":"DeleteModelResponse","fullName":"sapphillon.ai.v1.DeleteModelResponse","description":"Response message for deleting a model.","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"status","description":"The status of the response.\nIf the status is not OK, it indicates an error.","label":"","type":"Status","longType":"google.rpc.Status","fullType":"google.rpc.Status","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
 
 
 ### `GetModelRequest`
@@ -38,7 +38,7 @@ _**package** sapphillon.ai.v1_
 
 
 ### `GetModelResponse`
-<ProtoMessage key={5} message={{"name":"GetModelResponse","longName":"GetModelResponse","fullName":"sapphillon.ai.v1.GetModelResponse","description":"Response message for retrieving a model.","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"model","description":"","label":"","type":"Models","longType":"Models","fullType":"sapphillon.ai.v1.Models","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/ai/v1/model.proto#models"},{"name":"status","description":"","label":"","type":"Status","longType":"google.rpc.Status","fullType":"google.rpc.Status","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
+<ProtoMessage key={5} message={{"name":"GetModelResponse","longName":"GetModelResponse","fullName":"sapphillon.ai.v1.GetModelResponse","description":"Response message for retrieving a model.","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"model","description":"The model resource.","label":"","type":"Models","longType":"Models","fullType":"sapphillon.ai.v1.Models","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/ai/v1/model.proto#models"},{"name":"status","description":"The status of the response.\nIf the status is not OK, it indicates an error.","label":"","type":"Status","longType":"google.rpc.Status","fullType":"google.rpc.Status","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
 
 
 ### `ListModelsRequest`
@@ -46,7 +46,7 @@ _**package** sapphillon.ai.v1_
 
 
 ### `ListModelsResponse`
-<ProtoMessage key={7} message={{"name":"ListModelsResponse","longName":"ListModelsResponse","fullName":"sapphillon.ai.v1.ListModelsResponse","description":"Response message for listing models.","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"models","description":"A list of configured models.","label":"repeated","type":"Models","longType":"Models","fullType":"sapphillon.ai.v1.Models","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/ai/v1/model.proto#models"},{"name":"next_page_token","description":"A token to retrieve the next page of results.","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"status","description":"","label":"","type":"Status","longType":"google.rpc.Status","fullType":"google.rpc.Status","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
+<ProtoMessage key={7} message={{"name":"ListModelsResponse","longName":"ListModelsResponse","fullName":"sapphillon.ai.v1.ListModelsResponse","description":"Response message for listing models.","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"models","description":"A list of configured models.","label":"repeated","type":"Models","longType":"Models","fullType":"sapphillon.ai.v1.Models","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/ai/v1/model.proto#models"},{"name":"next_page_token","description":"A token to retrieve the next page of results.","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"status","description":"The status of the response.\nIf the status is not OK, it indicates an error.","label":"","type":"Status","longType":"google.rpc.Status","fullType":"google.rpc.Status","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
 
 
 ### `UpdateModelRequest`
@@ -54,7 +54,7 @@ _**package** sapphillon.ai.v1_
 
 
 ### `UpdateModelResponse`
-<ProtoMessage key={9} message={{"name":"UpdateModelResponse","longName":"UpdateModelResponse","fullName":"sapphillon.ai.v1.UpdateModelResponse","description":"Response message for updating a model.","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"model","description":"","label":"","type":"Models","longType":"Models","fullType":"sapphillon.ai.v1.Models","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/ai/v1/model.proto#models"},{"name":"status","description":"","label":"","type":"Status","longType":"google.rpc.Status","fullType":"google.rpc.Status","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
+<ProtoMessage key={9} message={{"name":"UpdateModelResponse","longName":"UpdateModelResponse","fullName":"sapphillon.ai.v1.UpdateModelResponse","description":"Response message for updating a model.","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"model","description":"The model resource.","label":"","type":"Models","longType":"Models","fullType":"sapphillon.ai.v1.Models","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/ai/v1/model.proto#models"},{"name":"status","description":"The status of the response.\nIf the status is not OK, it indicates an error.","label":"","type":"Status","longType":"google.rpc.Status","fullType":"google.rpc.Status","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
 
 ---
 ## Services

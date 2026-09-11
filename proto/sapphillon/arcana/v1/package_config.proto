@@ -1,0 +1,133 @@
+// Copyright 2025 Yuta Takahashi
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package sapphillon.arcana.v1;
+
+// Defines the package.toml schema for developer input configuration.
+// This file is the Single Source of Truth (SSOT) for Sapphillon plugin packages.
+// JSON Schema for IDE completion/validation and TypeScript type definitions are
+// auto-generated from these proto definitions. At build time, the static metadata
+// here is merged with dynamic information extracted from JSDoc (e.g., permissions)
+// to form the final PluginManifest embedded into package.js.
+
+// Holds the static metadata for a plugin package as authored by the developer in package.toml.
+// This metadata is static (declared by the developer); dynamic metadata such as permissions
+// are extracted from JSDoc at build time and are NOT part of this message.
+// Once a package is registered in a repository, the combination of id and version is immutable.
+// Re-registration or overwriting of the same (id, version) pair is prohibited.
+//
+// Fields:
+// - id: Stable unique identifier of the package.
+// - name: Human-friendly display name.
+// - version: Semantic version string.
+// - description: Summary of the package's purpose.
+// - author_github_id: GitHub username of the representative author.
+// - tags: Tags for categorization and discoverability.
+// - homepage_url: Optional URL to homepage or documentation.
+// - github_numeric_id: Optional immutable GitHub numeric user id for ownership verification.
+//
+// Example:
+// ```proto
+//   PackageConfig {
+//     id: "my-awesome-plugin"
+//     name: "My Awesome Plugin"
+//     version: "1.0.0"
+//     description: "Provides useful functionality"
+//     author_github_id: "alice"
+//     tags: ["automation", "utility"]
+//     homepage_url: "https://github.com/user/my-plugin"
+//   }
+// ```
+message PackageConfig {
+  // The stable unique identifier of the package.
+  // Behavior: Required. Must be unique within a repository. Immutable once registered.
+  // Format: Lowercase, hyphen-separated identifier (e.g., "my-awesome-plugin").
+  // Example: "my-awesome-plugin".
+  string id = 1;
+
+  // The human-friendly display name of the package.
+  // Example: "My Awesome Plugin".
+  string name = 2;
+
+  // The semantic version of the package.
+  // Format: Semantic Versioning "MAJOR.MINOR.PATCH" (e.g., "1.0.0", "2.1.3-beta.1").
+  // Behavior: Once registered in a repository, an (id, version) pair is immutable
+  // and cannot be overwritten.
+  // Example: "1.0.0".
+  string version = 3;
+
+  // A short summary of the package's purpose and capabilities.
+  string description = 4;
+
+  // The GitHub username of the package's representative author/owner.
+  // Behavior: Singular; identifies a single representative owner. Used for ownership
+  // attribution and cross-referenced with the developer's Minisign public key during
+  // verification. Prefer `github_numeric_id` as the immutable ownership anchor
+  // because GitHub usernames can be renamed.
+  // Example: "alice".
+  string author_github_id = 5;
+
+  // The list of tags for categorization and discoverability.
+  // Example: ["automation", "utility", "ai"].
+  repeated string tags = 6;
+
+  // Optional URL to the package's homepage, documentation, or source repository.
+  // Behavior: Optional. If omitted, no homepage is linked.
+  // Example: "https://github.com/user/my-plugin".
+  optional string homepage_url = 7;
+
+  // The immutable GitHub numeric user id used for ownership verification.
+  // Behavior: Optional but recommended. Unlike `author_github_id`, this numeric id
+  // never changes when a user is renamed, so it serves as the stable ownership anchor.
+  // Example: "12345678".
+  optional string github_numeric_id = 8;
+}
+
+// Root structure of the package.toml file.
+// Wraps the package configuration and declares the API (schema) version the package targets.
+//
+// Fields:
+// - package: The package configuration block.
+// - api_version: The Arcana ecosystem API version this package targets (Kubernetes-style, e.g., "v1", "v1alpha1").
+//
+// Example:
+// ```proto
+//   PackageToml {
+//     package: {
+//       id: "my-awesome-plugin"
+//       name: "My Awesome Plugin"
+//       version: "1.0.0"
+//       description: "Provides useful functionality"
+//       author_github_id: "alice"
+//       tags: ["automation", "utility"]
+//       homepage_url: "https://github.com/user/my-plugin"
+//     }
+//     api_version: "v1"
+//   }
+// ```
+message PackageToml {
+  // The package configuration block.
+  // See PackageConfig for details.
+  PackageConfig package = 1;
+
+  // The Arcana ecosystem API version this package targets.
+  // Used by the toolchain to enforce compatibility checks.
+  // Behavior: Packages built for incompatible API versions may be rejected.
+  // Format: Kubernetes-style version string — "vMAJOR" with an optional stability
+  //         suffix: "alphaN" or "betaN" (e.g., "v1", "v1alpha1", "v2beta3").
+  // Example: "v1".
+  string api_version = 2;
+}

@@ -1,0 +1,164 @@
+// Copyright 2025 Yuta Takahashi
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package sapphillon.arcana.v1;
+
+import "sapphillon/arcana/v1/package_config.proto";
+import "sapphillon/arcana/v1/permission.proto";
+
+// Defines the PluginManifest schema — the runtime metadata embedded into package.js.
+// At build time, the static package configuration from package.toml is merged with
+// dynamic information extracted from JSDoc (function definitions, permissions, I/O
+// types) to construct the final PluginManifest. The manifest is serialized into a
+// `/* @arcana-manifest {...} */` comment block inside the bundled package.js.
+//
+// During package verification, the client MUST confirm that the metadata embedded
+// here matches the repository index (e.g., permission lists) exactly; any mismatch
+// aborts the installation.
+
+// Represents a single input/output variable definition, analogous to JSDoc @param or @returns tags.
+//
+// Fields:
+// - type: The JavaScript value type of the variable.
+// - name: The variable name of the parameter or return value.
+// - description: A short description of what the variable represents.
+//
+// Example:
+// ```proto
+//   IODefinition {
+//     type: JS_VALUE_TYPE_STRING
+//     name: "userId"
+//     description: "The unique identifier of the user"
+//   }
+// ```
+message IODefinition {
+  // The JavaScript value type of the variable.
+  // Behavior: Enumerated type that classifies the value into one of the runtime JS
+  // primitives (object, array, string, number, boolean). Replaces the legacy
+  // free-form string type so that I/O types are machine-checkable during static
+  // analysis (sapphillon-cli check).
+  JSValueType type = 1;
+
+  // The variable name of the parameter or return value.
+  // Example: "userId", "message", "options".
+  string name = 2;
+
+  // A short description of what the variable represents.
+  string description = 3;
+}
+
+// JavaScript value types that can be associated with an IODefinition.
+// Values:
+// - JS_VALUE_TYPE_UNSPECIFIED: Default value. Do not use.
+// - JS_VALUE_TYPE_OBJECT: A plain object value.
+// - JS_VALUE_TYPE_ARRAY: An array value.
+// - JS_VALUE_TYPE_STRING: A string value.
+// - JS_VALUE_TYPE_NUMBER: A number value.
+// - JS_VALUE_TYPE_BOOLEAN: A boolean value.
+enum JSValueType {
+  // Default value. Do not use.
+  JS_VALUE_TYPE_UNSPECIFIED = 0;
+
+  // A plain object value.
+  JS_VALUE_TYPE_OBJECT = 1;
+
+  // An array value.
+  JS_VALUE_TYPE_ARRAY = 2;
+
+  // A string value.
+  JS_VALUE_TYPE_STRING = 3;
+
+  // A number value.
+  JS_VALUE_TYPE_NUMBER = 4;
+
+  // A boolean value.
+  JS_VALUE_TYPE_BOOLEAN = 5;
+}
+
+// Represents a single function exposed by the plugin, including JSDoc-extracted metadata such as permissions, parameters, and return value.
+//
+// Fields:
+// - name: The name of the function.
+// - description: A short description of what the function does and when to use it.
+// - permissions: The permissions required to execute this function.
+// - params: The function parameters (arguments), in declaration order.
+// - returns: The function return value, if any.
+//
+// Example:
+// ```proto
+//   FunctionDefinition {
+//     name: "sendNotification"
+//     description: "Sends a message to a configured channel"
+//     permissions: [{ kind: "net", target: "*" }]
+//     params: [{ type: JS_VALUE_TYPE_STRING, name: "channelId", description: "Target channel" }]
+//     returns: { type: JS_VALUE_TYPE_BOOLEAN, name: "success", description: "True if sent" }
+//   }
+// ```
+message FunctionDefinition {
+  // The name of the function.
+  // Behavior: Required. Must be unique within the plugin package. Used as the stable identifier for invoking the function at runtime.
+  // Example: "sendNotification".
+  string name = 1;
+
+  // A short description of what the function does and when to use it.
+  string description = 2;
+
+  // The permissions required to execute this function.
+  // Behavior: Extracted from JSDoc @permission tags at build time. Each entry uses
+  // the Arcana permission model (sapphillon.arcana.v1.Permission), which is distinct
+  // from the workflow permission model in sapphillon.v1.Permission. Validated during
+  // static analysis (sapphillon-cli check).
+  repeated Permission permissions = 3;
+
+  // The function parameters (arguments), in declaration order.
+  // Behavior: Extracted from JSDoc @param tags.
+  repeated IODefinition params = 4;
+
+  // The function return value.
+  // Behavior: Extracted from JSDoc @returns tags. Optional; left unset for void
+  // functions. Singular because a JavaScript function returns at most one value —
+  // tuple-like returns are expressed as a single object or array value whose
+  // `type` is JS_VALUE_TYPE_OBJECT or JS_VALUE_TYPE_ARRAY.
+  optional IODefinition returns = 5;
+}
+
+// The complete runtime metadata embedded into package.js at build time. Combines the static PackageConfig from package.toml with dynamic FunctionDefinitions extracted from JSDoc.
+//
+// The manifest is serialized into a `/* @arcana-manifest {...} */` comment block
+// inside the bundled package.js. During package verification, the client MUST
+// confirm that the metadata embedded here matches the repository index (e.g.,
+// permission lists) exactly; any mismatch aborts the installation.
+//
+// Fields:
+// - package_config: The static package configuration sourced from package.toml.
+// - functions: The functions exposed by this plugin.
+//
+// Example:
+// ```proto
+//   PluginManifest {
+//     package_config: { id: "my-plugin", name: "My Plugin", version: "1.0.0", ... }
+//     functions: [{ name: "sendNotification", ... }]
+//   }
+// ```
+message PluginManifest {
+  // The static package configuration sourced from package.toml.
+  // See PackageConfig.
+  PackageConfig package_config = 1;
+
+  // The functions exposed by this plugin.
+  // Behavior: Extracted from JSDoc at build time and merged with the static configuration to form the complete manifest.
+  repeated FunctionDefinition functions = 2;
+}

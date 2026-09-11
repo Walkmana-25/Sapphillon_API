@@ -52,12 +52,46 @@ service WorkflowService {
   // Runs a workflow based on the provided definition.
   rpc RunWorkflow(RunWorkflowRequest) returns (RunWorkflowResponse);
 
+  // Retrieves a workflow by its ID.
+  //
+  // Behavior:
+  // - Returns the full workflow definition for the specified ID.
+  //
+  // Errors:
+  // - NOT_FOUND if the requested workflow does not exist.
+  // - INVALID_ARGUMENT if the workflow_id is empty or malformed.
   rpc GetWorkflow(GetWorkflowRequest) returns (GetWorkflowResponse);
 
+  // Lists workflows matching optional filters.
+  //
+  // Behavior:
+  // - Returns a paginated list of workflows.
+  // - Supports filtering by display_name and workflow_language.
+  // - Supports sorting by configurable order-by clauses.
+  //
+  // Errors:
+  // - INVALID_ARGUMENT if the page_token is invalid or the filter is malformed.
   rpc ListWorkflows(ListWorkflowsRequest) returns (ListWorkflowsResponse);
 
+  // Updates an existing workflow.
+  //
+  // Behavior:
+  // - Only fields specified in the update_mask will be modified.
+  // - If update_mask is not provided, all fields will be updated.
+  //
+  // Errors:
+  // - NOT_FOUND if the workflow does not exist.
+  // - INVALID_ARGUMENT if the workflow is malformed or the update_mask contains invalid paths.
   rpc UpdateWorkflow(UpdateWorkflowRequest) returns (UpdateWorkflowResponse);
 
+  // Deletes a workflow by its ID.
+  //
+  // Behavior:
+  // - Permanently removes the workflow and all associated resources.
+  //
+  // Errors:
+  // - NOT_FOUND if the workflow does not exist.
+  // - INVALID_ARGUMENT if the workflow_id is empty or malformed.
   rpc DeleteWorkflow(DeleteWorkflowRequest) returns (DeleteWorkflowResponse);
 }
 
@@ -146,61 +180,108 @@ message RunWorkflowResponse {
   google.rpc.Status status = 2;
 }
 
+// Request message for retrieving a workflow by its ID.
 message GetWorkflowRequest {
+  // The ID of the workflow to retrieve.
   string workflow_id = 1;
 }
 
+// Response message for retrieving a workflow.
 message GetWorkflowResponse {
+  // The requested workflow definition.
   Workflow workflow = 1;
+
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 2;
 }
 
+// Filter criteria for listing workflows.
 message ListWorkflowsFilter {
+  // Filters workflows by display name. Supports exact and partial matching.
   string display_name = 1;
+
+  // Filters workflows by language.
   sapphillon.v1.WorkflowLanguage workflow_language = 2;
 }
 
-// Sort direction
+// Sort direction.
 enum OrderByDirection {
+  // Default value. Do not use.
   ORDER_BY_DIRECTION_UNSPECIFIED = 0;
-  // Ascending
+  // Ascending.
   ORDER_BY_DIRECTION_ASC = 1;
-  // Descending
+  // Descending.
   ORDER_BY_DIRECTION_DESC = 2;
 }
 
-// Order by clause
+// Order by clause.
 message OrderByClause {
-  // Field name to order by (e.g. "display_name", "updated_at")
+  // Field name to order by (e.g. "display_name", "updated_at").
   string field = 1;
+
+  // The direction to order by.
   OrderByDirection direction = 2;
 }
 
+// Request message for listing workflows.
 message ListWorkflowsRequest {
+  // The maximum number of workflows to return. The service may return fewer
+  // than this value. If zero, the server will pick an appropriate default.
   int32 page_size = 1;
+
+  // A page token, received from a previous `ListWorkflows` call.
+  // Provide this to retrieve the subsequent page.
   string page_token = 2;
+
+  // Filter criteria for the listed workflows.
   ListWorkflowsFilter filter = 3;
+
+  // Ordering clauses for the listed workflows.
   repeated OrderByClause order_by = 4;
 }
 
+// Response message for listing workflows.
 message ListWorkflowsResponse {
+  // The matching workflows.
   repeated Workflow workflows = 1;
+
+  // A token to retrieve the next page of results. If this field is empty,
+  // there are no more results.
   string next_page_token = 2;
+
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 3;
 }
 
+// Request message for updating a workflow.
 message UpdateWorkflowRequest {
+  // The workflow to update.
+  // The workflow's ID and name fields must identify an existing resource.
   Workflow workflow = 1;
+
+  // The set of field paths to update.
+  // If omitted, all mutable fields will be updated.
   google.protobuf.FieldMask update_mask = 2;
 }
 
+// Response message for updating a workflow.
 message UpdateWorkflowResponse {
+  // The updated workflow definition.
   Workflow workflow = 1;
+
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 2;
 }
 
+// Request message for deleting a workflow.
 message DeleteWorkflowRequest {
+  // The ID of the workflow to delete.
   string workflow_id = 1;
 }
 
+// Response message for deleting a workflow.
+// Intentionally empty to allow future extensibility.
 message DeleteWorkflowResponse {}

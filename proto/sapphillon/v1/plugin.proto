@@ -28,11 +28,13 @@ import "sapphillon/v1/permission.proto";
 // - description: A short description of what the parameter represents.
 //
 // Example:
+// ```proto
 //   FunctionParameter {
 //     name: "userId"
 //     type: "string"
 //     description: "The unique identifier of the user"
 //   }
+// ```
 message FunctionParameter {
   // The variable name of the parameter.
   // Example: "userId", "message", "options".
@@ -54,6 +56,7 @@ message FunctionParameter {
 // - returns: The return value information.
 //
 // Example:
+// ```proto
 //   FunctionDefine {
 //     parameters: [
 //       { name: "channelId", type: "string", description: "Target channel ID" },
@@ -61,6 +64,7 @@ message FunctionParameter {
 //     ]
 //     returns: [{ name: "result", type: "boolean", description: "True if sent successfully" }]
 //   }
+// ```
 message FunctionDefine {
   // The list of function parameters (arguments).
   // Order should match the function signature.
@@ -82,6 +86,7 @@ message FunctionDefine {
 // - function_define: JSDoc-style definition with parameters and return value.
 //
 // Example:
+// ```proto
 //   PluginFunction {
 //     function_id: "send_notification"
 //     function_name: "Send Notification"
@@ -92,6 +97,7 @@ message FunctionDefine {
 //       returns: [{ name: "success", type: "boolean", description: "True if sent" }]
 //     }
 //   }
+// ```
 message PluginFunction {
   // Stable unique identifier for the function.
   // Behavior: Required. Must be unique within the plugin package.
@@ -158,6 +164,7 @@ message PluginFunction {
 // - updated_at: Time when the plugin was last updated.
 //
 // Example:
+// ```proto
 //   PluginPackage {
 //     package_id: "notifications"
 //     package_name: "Notifications"
@@ -168,6 +175,7 @@ message PluginFunction {
 //     provider_id: "com.example"
 //     functions: [{ function_id: "send_notification", ... }]
 //   }
+// ```
 message PluginPackage {
   // Stable unique identifier for the plugin package.
   // Behavior: Required; unique across all installed plugins.

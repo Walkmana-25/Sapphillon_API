@@ -18,11 +18,11 @@ _**package** sapphillon.ai.v1_
 
 
 ### `SearchModelRequest`
-<ProtoMessage key={0} message={{"name":"SearchModelRequest","longName":"SearchModelRequest","fullName":"sapphillon.ai.v1.SearchModelRequest","description":"","hasExtensions":false,"hasFields":true,"hasOneofs":true,"extensions":[],"fields":[{"name":"provider_name_query","description":"The query string to search for models.","label":"optional","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":true,"oneofdecl":"_provider_name_query","defaultValue":""},{"name":"model_name_query","description":"","label":"optional","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":true,"oneofdecl":"_model_name_query","defaultValue":""},{"name":"page_size","description":"The maximum number of results to return.","label":"","type":"int32","longType":"int32","fullType":"int32","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"page_token","description":"The page token for pagination.","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
+<ProtoMessage key={0} message={{"name":"SearchModelRequest","longName":"SearchModelRequest","fullName":"sapphillon.ai.v1.SearchModelRequest","description":"Request message for searching models.","hasExtensions":false,"hasFields":true,"hasOneofs":true,"extensions":[],"fields":[{"name":"provider_name_query","description":"The query string to match against provider names.\nIf not specified, all providers are included.","label":"optional","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":true,"oneofdecl":"_provider_name_query","defaultValue":""},{"name":"model_name_query","description":"The query string to match against model names.\nIf not specified, all models are included.","label":"optional","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":true,"oneofdecl":"_model_name_query","defaultValue":""},{"name":"page_size","description":"The maximum number of results to return.","label":"","type":"int32","longType":"int32","fullType":"int32","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"page_token","description":"The page token for pagination.","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
 
 
 ### `SearchModelResponse`
-<ProtoMessage key={1} message={{"name":"SearchModelResponse","longName":"SearchModelResponse","fullName":"sapphillon.ai.v1.SearchModelResponse","description":"","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"models","description":"The list of models matching the search criteria.","label":"repeated","type":"Models","longType":"Models","fullType":"sapphillon.ai.v1.Models","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/ai/v1/model.proto#models"},{"name":"next_page_token","description":"The token to retrieve the next page of results.","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"status","description":"","label":"","type":"Status","longType":"google.rpc.Status","fullType":"google.rpc.Status","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
+<ProtoMessage key={1} message={{"name":"SearchModelResponse","longName":"SearchModelResponse","fullName":"sapphillon.ai.v1.SearchModelResponse","description":"Response message for searching models.","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"models","description":"The list of models matching the search criteria.","label":"repeated","type":"Models","longType":"Models","fullType":"sapphillon.ai.v1.Models","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":"","typeLink":"/protodocs/sapphillon/ai/v1/model.proto#models"},{"name":"next_page_token","description":"The token to retrieve the next page of results.","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"status","description":"The status of the response.\nIf the status is not OK, it indicates an error.","label":"","type":"Status","longType":"google.rpc.Status","fullType":"google.rpc.Status","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
 
 ---
 ## Services
@@ -30,7 +30,9 @@ _**package** sapphillon.ai.v1_
 
 ### `SearchModelService`
 
-
+Service for searching LLM models.
+Allows clients to find models by provider or model name using
+flexible query matching.
 
 
 #### `SearchModel`

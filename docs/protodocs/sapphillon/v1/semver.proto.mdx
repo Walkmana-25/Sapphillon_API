@@ -1,0 +1,26 @@
+---
+title: semver.proto
+hide_title: true
+---
+
+import { ProtoMessage, ProtoServiceMethod, ProtoEnum } from '@theme/ProtoFile';
+
+# `semver.proto`
+_**path** sapphillon/v1/semver.proto_
+
+_**package** sapphillon.v1_
+
+
+
+---
+
+## Messages
+
+
+### `SemanticVersion`
+<ProtoMessage key={0} message={{"name":"SemanticVersion","longName":"SemanticVersion","fullName":"sapphillon.v1.SemanticVersion","description":"Represents a structured Semantic Versioning 2.0.0 version.\nFollows the spec at https://semver.org. Encodes the version as discrete\nnumeric components plus optional pre-release and build metadata strings so\nconsumers can compare versions programmatically without re-parsing text.\n\nFields:\n- major: The major version component.\n- minor: The minor version component.\n- patch: The patch version component.\n- prerelease: The optional pre-release identifier.\n- build: The optional build metadata identifier.\n\nExample:\n```proto\n  SemanticVersion {\n    major: 1\n    minor: 2\n    patch: 3\n    prerelease: \"alpha.1\"\n    build: \"exp.sha.5114f85\"\n  }\n```","hasExtensions":false,"hasFields":true,"hasOneofs":false,"extensions":[],"fields":[{"name":"major","description":"The major version component.\nBehavior: MUST be incremented when making incompatible API changes.\nTogether with `minor`, it forms the public API version pair.\nExample: 1.","label":"","type":"uint32","longType":"uint32","fullType":"uint32","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"minor","description":"The minor version component.\nBehavior: MUST be incremented when adding backwards-compatible functionality,\nand MUST be reset to 0 when `major` is incremented.\nExample: 2.","label":"","type":"uint32","longType":"uint32","fullType":"uint32","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"patch","description":"The patch version component.\nBehavior: MUST be incremented when making backwards-compatible bug fixes,\nand MUST be reset to 0 when `minor` (or `major`) is incremented.\nExample: 3.","label":"","type":"uint32","longType":"uint32","fullType":"uint32","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"prerelease","description":"The optional pre-release identifier, following semver.org pre-release syntax.\nBehavior: A version with a non-empty `prerelease` has lower precedence than\nthe same version without one (e.g., 1.0.0-alpha < 1.0.0). May be empty.\nFormat: Dot-separated identifiers (e.g., \"alpha.1\", \"0.3.7\", \"beta-2\").","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""},{"name":"build","description":"The optional build metadata identifier, following semver.org build metadata syntax.\nBehavior: Build metadata MUST be ignored when determining version precedence,\nso 1.0.0+build1 and 1.0.0+build2 are equivalent. May be empty.\nFormat: Dot-separated identifiers (e.g., \"exp.sha.5114f85\", \"20130313144700\").","label":"","type":"string","longType":"string","fullType":"string","ismap":false,"isoneof":false,"oneofdecl":"","defaultValue":""}]}} />
+
+---
+
+
+  

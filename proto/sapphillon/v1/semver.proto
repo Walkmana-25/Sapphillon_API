@@ -1,0 +1,71 @@
+// Copyright 2025 Yuta Takahashi
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package sapphillon.v1;
+
+// Represents a structured Semantic Versioning 2.0.0 version.
+// Follows the spec at https://semver.org. Encodes the version as discrete
+// numeric components plus optional pre-release and build metadata strings so
+// consumers can compare versions programmatically without re-parsing text.
+//
+// Fields:
+// - major: The major version component.
+// - minor: The minor version component.
+// - patch: The patch version component.
+// - prerelease: The optional pre-release identifier.
+// - build: The optional build metadata identifier.
+//
+// Example:
+// ```proto
+//   SemanticVersion {
+//     major: 1
+//     minor: 2
+//     patch: 3
+//     prerelease: "alpha.1"
+//     build: "exp.sha.5114f85"
+//   }
+// ```
+message SemanticVersion {
+  // The major version component.
+  // Behavior: MUST be incremented when making incompatible API changes.
+  // Together with `minor`, it forms the public API version pair.
+  // Example: 1.
+  uint32 major = 1;
+
+  // The minor version component.
+  // Behavior: MUST be incremented when adding backwards-compatible functionality,
+  // and MUST be reset to 0 when `major` is incremented.
+  // Example: 2.
+  uint32 minor = 2;
+
+  // The patch version component.
+  // Behavior: MUST be incremented when making backwards-compatible bug fixes,
+  // and MUST be reset to 0 when `minor` (or `major`) is incremented.
+  // Example: 3.
+  uint32 patch = 3;
+
+  // The optional pre-release identifier, following semver.org pre-release syntax.
+  // Behavior: A version with a non-empty `prerelease` has lower precedence than
+  // the same version without one (e.g., 1.0.0-alpha < 1.0.0). May be empty.
+  // Format: Dot-separated identifiers (e.g., "alpha.1", "0.3.7", "beta-2").
+  string prerelease = 4;
+
+  // The optional build metadata identifier, following semver.org build metadata syntax.
+  // Behavior: Build metadata MUST be ignored when determining version precedence,
+  // so 1.0.0+build1 and 1.0.0+build2 are equivalent. May be empty.
+  // Format: Dot-separated identifiers (e.g., "exp.sha.5114f85", "20130313144700").
+  string build = 5;
+}

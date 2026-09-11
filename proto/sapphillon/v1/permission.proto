@@ -93,6 +93,7 @@ enum PermissionLevel {
 // - permission_level: Sensitivity level to inform review and approval.
 //
 // Example:
+// ```proto
 //   Permission {
 //     display_name: "Execute Workflow"
 //     description: "Runs the daily ETL pipeline"
@@ -100,6 +101,7 @@ enum PermissionLevel {
 //     resource: ["workflows/etl_daily"]
 //     permission_level: PERMISSION_LEVEL_HIGH
 //   }
+// ```
 //
 // Field behavior notes:
 // - display_name: Recommended.
@@ -156,6 +158,8 @@ message AllowedPermission {
   // Permissions that are allowed when invoking the specified plugin function.
   // Prefer specific Permission.resource and Permission.action combinations to minimize scope.
   // Example:
+  // ```proto
   //   permissions: [ { resource: "secrets/my-secret", action: READ } ]
+  // ```
   repeated Permission permissions = 2;
 }

@@ -1,3 +1,17 @@
+// Copyright 2025 Yuta Takahashi
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 syntax = "proto3";
 
 package sapphillon.ai.v1;
@@ -6,11 +20,9 @@ import "google/protobuf/field_mask.proto";
 import "google/rpc/status.proto";
 import "sapphillon/ai/v1/provider.proto";
 
-/**
- * Service for managing LLM providers.
- * Allows clients to configure, list, update, and remove
- * different LLM providers that the system can use.
- */
+// Service for managing LLM providers.
+// Allows clients to configure, list, update, and remove
+// different LLM providers that the system can use.
 service ProviderService {
   // Creates a new provider configuration.
   // The `api_key` must be provided in the request.
@@ -51,6 +63,9 @@ message GetProviderRequest {
   // The resource name of the provider to retrieve.
   // Format: "providers/{provider_id}"
   string name = 1;
+
+  // The status of the request.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 2;
 }
 
@@ -75,37 +90,45 @@ message ListProvidersResponse {
   // If this field is empty, there are no more results.
   string next_page_token = 2;
 
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 3;
 }
 
-//
 // Response message for creating a provider.
-//
 message CreateProviderResponse {
+  // The provider resource.
   Provider provider = 1;
+
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 2;
 }
 
-//
 // Response message for retrieving a provider.
-//
 message GetProviderResponse {
+  // The provider resource.
   Provider provider = 1;
+
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 2;
 }
 
-//
 // Response message for updating a provider.
-//
 message UpdateProviderResponse {
+  // The provider resource.
   Provider provider = 1;
+
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 2;
 }
 
-//
 // Response message for deleting a provider.
-//
 message DeleteProviderResponse {
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 1;
 }
 
@@ -116,7 +139,7 @@ message UpdateProviderRequest {
   Provider provider = 1;
 
   // The list of fields to be updated.
-  // e.g., "display_name", "api_key"
+  // Example: "display_name", "api_key".
   google.protobuf.FieldMask update_mask = 2;
 }
 

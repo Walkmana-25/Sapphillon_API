@@ -1,3 +1,17 @@
+// Copyright 2025 Yuta Takahashi
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 syntax = "proto3";
 
 package sapphillon.ai.v1;
@@ -6,11 +20,9 @@ import "google/protobuf/field_mask.proto";
 import "google/rpc/status.proto";
 import "sapphillon/ai/v1/model.proto";
 
-/**
- * Service for managing LLM models.
- * Allows clients to configure, list, update, and remove
- * different LLM models that the system can use.
- */
+// Service for managing LLM models.
+// Allows clients to configure, list, update, and remove
+// different LLM models that the system can use.
 service ModelService {
   // Creates a new model configuration.
   // Returns the created model resource.
@@ -39,7 +51,11 @@ message CreateModelRequest {
 
 // Response message for creating a model.
 message CreateModelResponse {
+  // The model resource.
   Models model = 1;
+
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 2;
 }
 
@@ -52,7 +68,11 @@ message GetModelRequest {
 
 // Response message for retrieving a model.
 message GetModelResponse {
+  // The model resource.
   Models model = 1;
+
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 2;
 }
 
@@ -70,6 +90,9 @@ message ListModelsResponse {
   repeated Models models = 1;
   // A token to retrieve the next page of results.
   string next_page_token = 2;
+
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 3;
 }
 
@@ -84,7 +107,11 @@ message UpdateModelRequest {
 
 // Response message for updating a model.
 message UpdateModelResponse {
+  // The model resource.
   Models model = 1;
+
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 2;
 }
 
@@ -97,5 +124,7 @@ message DeleteModelRequest {
 
 // Response message for deleting a model.
 message DeleteModelResponse {
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 1;
 }

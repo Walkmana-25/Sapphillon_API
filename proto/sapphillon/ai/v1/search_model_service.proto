@@ -1,19 +1,40 @@
+// Copyright 2025 Yuta Takahashi
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 syntax = "proto3";
 package sapphillon.ai.v1;
 
 import "google/rpc/status.proto";
 import "sapphillon/ai/v1/model.proto";
 
+// Service for searching LLM models.
+// Allows clients to find models by provider or model name using
+// flexible query matching.
 service SearchModelService {
   // Searches for models based on the provided query.
   // Returns a list of models that match the search criteria.
   rpc SearchModel(SearchModelRequest) returns (SearchModelResponse);
 }
 
+// Request message for searching models.
 message SearchModelRequest {
-  // The query string to search for models.
+  // The query string to match against provider names.
+  // If not specified, all providers are included.
   optional string provider_name_query = 1;
 
+  // The query string to match against model names.
+  // If not specified, all models are included.
   optional string model_name_query = 2;
 
   // The maximum number of results to return.
@@ -23,6 +44,7 @@ message SearchModelRequest {
   string page_token = 4;
 }
 
+// Response message for searching models.
 message SearchModelResponse {
   // The list of models matching the search criteria.
   repeated sapphillon.ai.v1.Models models = 1;
@@ -30,5 +52,7 @@ message SearchModelResponse {
   // The token to retrieve the next page of results.
   string next_page_token = 2;
 
+  // The status of the response.
+  // If the status is not OK, it indicates an error.
   google.rpc.Status status = 3;
 }
